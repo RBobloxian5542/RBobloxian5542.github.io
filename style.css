@@ -1,0 +1,219 @@
+/* ============================================
+   PORTFOLIO — RBobloxian5542
+   style.css
+   ============================================ */
+
+/* --- Variables --- */
+:root {
+  --bg:         #0a0a0a;
+  --text:       #f0ead8;
+  --pink:       #ff6eb4;
+  --pink-dim:   rgba(255, 110, 180, 0.15);
+  --text-dim:   #888;
+  --font-title: 'Bebas Neue', sans-serif;
+  --font-body:  'DM Mono', monospace;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 5vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle pink glow behind avatar */
+.hero::after {
+  content: '';
+  position: absolute;
+  right: 10vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 110, 180, 0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* --- Top bar --- */
+.hero-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6vh;
+}
+
+.hero-name {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.hero-portfolio-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+/* --- Main content row --- */
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  gap: 4vw;
+}
+
+/* --- Left --- */
+.hero-left {
+  flex: 1;
+  max-width: 600px;
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: clamp(5rem, 11vw, 10rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  margin-bottom: 2rem;
+}
+
+.hero-title-accent {
+  color: var(--pink);
+}
+
+.hero-desc {
+  font-size: 0.82rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  max-width: 420px;
+  margin-bottom: 2.5rem;
+  text-align: justify;
+}
+
+.hero-discord {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+
+.hero-discord:hover {
+  color: var(--pink);
+}
+
+.discord-icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* --- Right (avatar) --- */
+.hero-right {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Placeholder box — remove once you have the avatar PNG */
+.avatar-placeholder {
+  width: 320px;
+  height: 420px;
+  border: 1px dashed rgba(255, 110, 180, 0.25);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.8;
+}
+
+.avatar-placeholder span {
+  color: var(--pink);
+  font-size: 0.75rem;
+}
+
+/* Real avatar — add class="avatar-img" to your <img> */
+.avatar-img {
+  height: 480px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- Scroll arrow --- */
+.hero-scroll {
+  text-align: center;
+  font-size: 1.4rem;
+  color: var(--text-dim);
+  padding-bottom: 1rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 3rem;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 18vw, 6rem);
+  }
+
+  .avatar-placeholder {
+    width: 220px;
+    height: 280px;
+  }
+
+  .hero-right {
+    align-self: center;
+  }
+}
