@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games — RBobloxian5542</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0d0d0f;
+      --bg2:      #131316;
+      --bg3:      #1a1a1e;
+      --text:     #f0ead8;
+      --text-dim: #777;
+      --tag-lead: #ff6eb4;
+      --tag-contrib: #60a5fa;
+      --tag-part: #a78bfa;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 5vw;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: var(--bg2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+    .back-btn span { font-size: 1rem; }
+
+    .topbar-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 3.5rem 5vw 2rem;
+    }
+
+    .page-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── FILTER TAGS ── */
+    .filters {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0 5vw 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 1px;
+    }
+
+    .filter-btn:hover,
+    .filter-btn.active {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .filter-btn[data-filter="Lead"].active      { border-color: var(--tag-lead); color: var(--tag-lead); }
+    .filter-btn[data-filter="Contribution"].active { border-color: var(--tag-contrib); color: var(--tag-contrib); }
+    .filter-btn[data-filter="Part Time"].active { border-color: var(--tag-part); color: var(--tag-part); }
+
+    /* ── GAMES GRID ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+      padding: 0 5vw 5rem;
+    }
+
+    .game-card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.04);
+      border-radius: 2px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .game-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255,255,255,0.1);
+    }
+
+    .game-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--bg3);
+    }
+
+    /* placeholder when no image */
+    .game-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .game-info {
+      padding: 0.9rem 1rem 1rem;
+    }
+
+    .game-tag {
+      display: inline-block;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 1px;
+      margin-bottom: 0.55rem;
+      border: 1px solid;
+    }
+
+    .game-tag.Lead         { color: var(--tag-lead);    border-color: var(--tag-lead);    background: rgba(255,110,180,0.07); }
+    .game-tag.Contribution { color: var(--tag-contrib); border-color: var(--tag-contrib); background: rgba(96,165,250,0.07); }
+    .game-tag.Part-Time    { color: var(--tag-part);    border-color: var(--tag-part);    background: rgba(167,139,250,0.07); }
+
+    .game-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+
+    .game-visits {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .game-visits b {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    /* hide cards based on filter */
+    .game-card.hidden { display: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .games-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <nav class="topbar">
+    <a href="https://rbobloxian5542.github.io" class="back-btn">
+      <span>←</span> Back
+    </a>
+    <span class="topbar-title">RBobloxian5542 — Games</span>
+  </nav>
+
+  <!-- Header -->
+  <div class="page-header">
+    <h1>Games</h1>
+    <p>All games I've worked on — led, contributed to, or scripted part time.</p>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="Lead">Lead Developer</button>
+    <button class="filter-btn" data-filter="Contribution">Contribution</button>
+    <button class="filter-btn" data-filter="Part Time">Part Time</button>
+  </div>
+
+  <!-- Grid -->
+  <div class="games-grid" id="games-grid">
+    <div style="color:var(--text-dim); font-size:0.75rem; letter-spacing:0.1em;">Loading...</div>
+  </div>
+
+  <script>
+    const tagOrder = { 'Lead Developer': 0, 'Part Time': 1, 'Contribution': 2 };
+    const tagClass = { 'Lead Developer': 'Lead', 'Part Time': 'Part-Time', 'Contribution': 'Contribution' };
+
+    // Filter
+    const btns  = document.querySelectorAll('.filter-btn');
+    const grid  = document.getElementById('games-grid');
+
+    function applyFilter(filter) {
+      document.querySelectorAll('.game-card').forEach(card => {
+        if (filter === 'all' || card.dataset.tag === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFilter(btn.dataset.filter);
+      });
+    });
+
+    // Load games from JSON
+    fetch('../games.json')
+      .then(r => r.json())
+      .then(games => {
+        // Sort: Lead Developer → Part Time → Contribution
+        games.sort((a, b) => (tagOrder[a.tag] ?? 99) - (tagOrder[b.tag] ?? 99));
+
+        grid.innerHTML = games.map(g => {
+          const cls = tagClass[g.tag] || 'Contribution';
+          const visits = parseInt(g.visits).toLocaleString();
+          const thumb = g.thumb
+            ? `<img class="game-thumb" src="../${g.thumb}" alt="${g.title}">`
+            : `<div class="game-thumb-placeholder">Thumbnail</div>`;
+          const href = g.link || '#';
+
+          return `
+            <a href="${href}" target="_blank" class="game-card" data-tag="${g.tag}">
+              ${thumb}
+              <div class="game-info">
+                <span class="game-tag ${cls}">${g.tag}</span>
+                <div class="game-title">${g.title}</div>
+                <div class="game-visits">Visits: <b>${visits}</b></div>
+              </div>
+            </a>`;
+        }).join('');
+      })
+      .catch(() => {
+        grid.innerHTML = '<div style="color:var(--text-dim);font-size:0.75rem;">Could not load games.json</div>';
+      });
+  </script>
+
+</body>
+</html>
