@@ -302,28 +302,24 @@
         </div>
       </div>
 
-      <div class="hero-right">
-        <img src="Images/RobloxAvatar.png" alt="Roblox Avatar" class="avatar">
-      </div>
-
       <!-- Availability Badge -->
       <div class="badge-wrap">
         <div class="badge-row">
           <span class="badge-dot" id="status-dot"></span>
           <span class="badge-label" id="status-text">Loading...</span>
         </div>
+        <div class="badge-row badge-indent">
+          <span class="badge-dot grey"></span>
+          <span>Availability: Can work everyday, more time on weekends</span>
+        </div>
         <div class="badge-row">
           <span class="badge-dot grey"></span>
           <span id="badge-timezone">—</span>
         </div>
-        <div class="badge-row">
-          <span class="badge-dot grey"></span>
-          <span id="badge-viewer-tz">Your time: —</span>
-        </div>
-        <div class="badge-row">
-          <span class="badge-dot grey"></span>
-          <span>Can work everyday, more time on weekends</span>
-        </div>
+      </div>
+
+      <div class="hero-right">
+        <img src="Images/RobloxAvatar.png" alt="Roblox Avatar" class="avatar">
       </div>
 
     </div>
@@ -367,15 +363,25 @@
           text.textContent = 'Not Available';
         }
 
-        // My timezone
-        document.getElementById('badge-timezone').textContent =
-          'My timezone: ' + (cfg.timezone || '—');
+        // Live clock in my timezone
+        const tz = cfg.timezone || 'UTC+1';
+        const ianaMap = {
+          'UTC+1': 'Europe/Prague', 'UTC+2': 'Europe/Helsinki',
+          'UTC+0': 'Europe/London', 'UTC-5': 'America/New_York',
+          'UTC-8': 'America/Los_Angeles'
+        };
+        const ianaZone = ianaMap[tz] || 'Europe/Prague';
 
-        // Viewer's local time
-        const viewerTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const viewerTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-        document.getElementById('badge-viewer-tz').textContent =
-          'Your time: ' + viewerTime + ' (' + viewerTz + ')';
+        function updateClock() {
+          const time = new Date().toLocaleTimeString('en-GB', {
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            timeZone: ianaZone
+          });
+          document.getElementById('badge-timezone').textContent =
+            'Timezone: ' + tz + ' (' + time + ')';
+        }
+        updateClock();
+        setInterval(updateClock, 1000);
       })
       .catch(() => {
         document.getElementById('status-text').textContent = 'Config not found';
