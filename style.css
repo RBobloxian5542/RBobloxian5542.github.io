@@ -3,18 +3,17 @@
    style.css
    ============================================ */
 
-/* Variables */
+/* --- Variables --- */
 :root {
-  --bg:         #0a0a0a;
-  --text:       #f0ead8;
-  --pink:       #ff6eb4;
-  --pink-dim:   rgba(255, 110, 180, 0.15);
-  --text-dim:   #888;
+  --bg:        #0a0a0a;
+  --text:      #f0ead8;
+  --pink:      #ff6eb4;
+  --text-dim:  #888888;
   --font-title: 'Bebas Neue', sans-serif;
   --font-body:  'DM Mono', monospace;
 }
 
-/* Reset */
+/* --- Reset --- */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -33,7 +32,9 @@ body {
   overflow-x: hidden;
 }
 
-/* HERO */
+/* ============================================
+   HERO
+   ============================================ */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -43,7 +44,7 @@ body {
   overflow: hidden;
 }
 
-/* glow behind avatar */
+/* Pink glow behind avatar */
 .hero::after {
   content: '';
   position: absolute;
@@ -64,7 +65,8 @@ body {
   margin-bottom: 6vh;
 }
 
-.hero-name {
+.hero-name,
+.hero-label {
   font-family: var(--font-body);
   font-size: 0.75rem;
   letter-spacing: 0.15em;
@@ -72,15 +74,7 @@ body {
   color: var(--text-dim);
 }
 
-.hero-portfolio-label {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-}
-
-/* --- Main content row --- */
+/* --- Content row --- */
 .hero-content {
   display: flex;
   justify-content: space-between;
@@ -99,12 +93,11 @@ body {
   font-family: var(--font-title);
   font-size: clamp(5rem, 11vw, 10rem);
   line-height: 0.92;
-  letter-spacing: 0.01em;
   color: var(--text);
   margin-bottom: 2rem;
 }
 
-.hero-title-accent {
+.hero-title .accent {
   color: var(--pink);
 }
 
@@ -121,58 +114,29 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
-  text-decoration: none;
   color: var(--text);
   font-size: 0.9rem;
   letter-spacing: 0.04em;
-  transition: color 0.2s;
-}
-
-.hero-discord:hover {
-  color: var(--pink);
 }
 
 .discord-icon {
   width: 32px;
   height: 32px;
+  object-fit: contain;
 }
 
-/* --- Right (avatar) --- */
+/* --- Right --- */
 .hero-right {
   flex: 0 0 auto;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   position: relative;
   z-index: 1;
 }
 
-/* Placeholder box — remove once you have the avatar PNG */
-.avatar-placeholder {
-  width: 320px;
-  height: 420px;
-  border: 1px dashed rgba(255, 110, 180, 0.25);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  color: var(--text-dim);
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.8;
-}
-
-.avatar-placeholder span {
-  color: var(--pink);
-  font-size: 0.75rem;
-}
-
-/* Real avatar — add class="avatar-img" to your <img> */
-.avatar-img {
-  height: 480px;
+.avatar {
+  height: 520px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -206,9 +170,8 @@ body {
     font-size: clamp(4rem, 18vw, 6rem);
   }
 
-  .avatar-placeholder {
-    width: 220px;
-    height: 280px;
+  .avatar {
+    height: 300px;
   }
 
   .hero-right {
