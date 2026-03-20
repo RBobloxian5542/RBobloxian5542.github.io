@@ -77,6 +77,8 @@
       color: var(--text);
       margin-bottom: 1.5rem;
       letter-spacing: 0.01em;
+      -webkit-text-stroke: 1px var(--text);
+      color: transparent;
     }
 
     .hero-desc {
@@ -178,6 +180,38 @@
       .cat-btn { height: 140px; }
     }
 
+    /* ── AVAILABILITY BADGE ── */
+    .badge-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-self: center;
+      flex: 0 0 auto;
+      min-width: 220px;
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-dot.green { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+    .badge-dot.red   { background: #f87171; box-shadow: 0 0 6px #f87171; }
+    .badge-dot.grey  { background: #666; }
+
+    .badge-label { color: var(--text); }
+
     /* ── CATEGORY BUTTONS ── */
     .categories {
       display: grid;
@@ -272,6 +306,26 @@
         <img src="Images/RobloxAvatar.png" alt="Roblox Avatar" class="avatar">
       </div>
 
+      <!-- Availability Badge -->
+      <div class="badge-wrap">
+        <div class="badge-row">
+          <span class="badge-dot" id="status-dot"></span>
+          <span class="badge-label" id="status-text">Loading...</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge-dot grey"></span>
+          <span id="badge-timezone">—</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge-dot grey"></span>
+          <span id="badge-viewer-tz">Your time: —</span>
+        </div>
+        <div class="badge-row">
+          <span class="badge-dot grey"></span>
+          <span>Can work everyday, more time on weekends</span>
+        </div>
+      </div>
+
     </div>
 
 
@@ -281,22 +335,52 @@
   <!-- Category Buttons -->
   <section class="categories">
 
-    <a href="#games" class="cat-btn">
+    <a href="https://rbobloxian5542.github.io/games" class="cat-btn">
       <img src="Images/ButtonGames.png" alt="Games">
       <span class="cat-btn-label">Games</span>
     </a>
 
-    <a href="#systems" class="cat-btn">
+    <a href="https://rbobloxian5542.github.io/systems" class="cat-btn">
       <img src="Images/ButtonSystems.png" alt="Systems">
       <span class="cat-btn-label">Game Systems</span>
     </a>
 
-    <a href="#ui" class="cat-btn">
+    <a href="https://rbobloxian5542.github.io/ui" class="cat-btn">
       <img src="Images/ButtonUI.png" alt="UI">
       <span class="cat-btn-label">UI Animations (UX)</span>
     </a>
 
   </section>
+
+  <script>
+    fetch('config.json')
+      .then(r => r.json())
+      .then(cfg => {
+        // Status
+        const dot  = document.getElementById('status-dot');
+        const text = document.getElementById('status-text');
+        if (cfg.openToWork) {
+          dot.classList.add('green');
+          text.textContent = 'Open to Work';
+        } else {
+          dot.classList.add('red');
+          text.textContent = 'Not Available';
+        }
+
+        // My timezone
+        document.getElementById('badge-timezone').textContent =
+          'My timezone: ' + (cfg.timezone || '—');
+
+        // Viewer's local time
+        const viewerTz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const viewerTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        document.getElementById('badge-viewer-tz').textContent =
+          'Your time: ' + viewerTime + ' (' + viewerTz + ')';
+      })
+      .catch(() => {
+        document.getElementById('status-text').textContent = 'Config not found';
+      });
+  </script>
 
 </body>
 </html>
