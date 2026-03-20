@@ -3,7 +3,7 @@
    style.css
    ============================================ */
 
-/* --- Variables --- */
+/* Variables */
 :root {
   --bg:         #0a0a0a;
   --text:       #f0ead8;
@@ -14,7 +14,7 @@
   --font-body:  'DM Mono', monospace;
 }
 
-/* --- Reset --- */
+/* Reset */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -33,9 +33,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ============================================
-   HERO
-   ============================================ */
+/* HERO */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -45,7 +43,7 @@ body {
   overflow: hidden;
 }
 
-/* subtle pink glow behind avatar */
+/* glow behind avatar */
 .hero::after {
   content: '';
   position: absolute;
