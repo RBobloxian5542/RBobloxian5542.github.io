@@ -185,13 +185,61 @@
         align-items: center;
         gap: 2rem;
       }
-      .hero-right {
-        width: 280px;
-        height: 340px;
-      }
+      .hero-right { width: 280px; height: 340px; }
       .avatar { height: 320px; }
       .hero-socials { flex-wrap: wrap; gap: 1.2rem; }
+      .categories { grid-template-columns: 1fr; }
+      .cat-btn { height: 140px; }
     }
+
+    /* ── CATEGORY BUTTONS ── */
+    .categories {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 0 5vw 5rem;
+    }
+
+    .cat-btn {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .cat-btn img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: blur(4px) brightness(0.35);
+      transform: scale(1.05);
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .cat-btn:hover img {
+      filter: blur(2px) brightness(0.55);
+      transform: scale(1.08);
+    }
+
+    .cat-btn-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      letter-spacing: 0.05em;
+      color: var(--text);
+      z-index: 2;
+      transition: opacity 0.2s;
+    }
+
+    .cat-btn:hover .cat-btn-label { opacity: 0.8; }
   </style>
 </head>
 <body>
@@ -243,6 +291,26 @@
     <div class="hero-scroll">&#8595;</div>
 
   </header>
+
+  <!-- Category Buttons -->
+  <section class="categories">
+
+    <a href="#games" class="cat-btn">
+      <img src="Images/ButtonGames.png" alt="Games">
+      <span class="cat-btn-label">Games Worked On</span>
+    </a>
+
+    <a href="#systems" class="cat-btn">
+      <img src="Images/ButtonSystems.png" alt="Systems">
+      <span class="cat-btn-label">Systems</span>
+    </a>
+
+    <a href="#ui" class="cat-btn">
+      <img src="Images/ButtonUI.png" alt="UI">
+      <span class="cat-btn-label">UI Scripting</span>
+    </a>
+
+  </section>
 
 </body>
 </html>
