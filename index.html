@@ -7,36 +7,194 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --bg:        #0a0a0a;
+      --text:      #f0ead8;
+      --text-dim:  #999999;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 2.5rem 6vw;
+    }
+
+    /* top bar */
+    .hero-topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6vh;
+    }
+
+    .hero-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* content row */
+    .hero-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex: 1;
+      gap: 4vw;
+    }
+
+    /* left */
+    .hero-left {
+      flex: 1;
+      max-width: 580px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4.5rem, 9vw, 9rem);
+      line-height: 0.92;
+      color: var(--text);
+      margin-bottom: 2rem;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-desc {
+      font-size: 0.82rem;
+      line-height: 1.85;
+      color: var(--text-dim);
+      max-width: 440px;
+      margin-bottom: 2.5rem;
+      text-align: justify;
+    }
+
+    /* socials */
+    .hero-socials {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      transition: opacity 0.2s;
+      width: fit-content;
+    }
+
+    .social-link:hover { opacity: 0.6; }
+
+    .social-link.no-link {
+      cursor: default;
+      opacity: 0.55;
+    }
+
+    .social-icon {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    /* right */
+    .hero-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .avatar {
+      height: 520px;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* scroll arrow */
+    .hero-scroll {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--text-dim);
+      padding-bottom: 0.5rem;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(7px); }
+    }
+
+    /* responsive */
+    @media (max-width: 768px) {
+      .hero-content {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: 2.5rem;
+      }
+      .avatar {
+        height: 260px;
+      }
+      .hero-right {
+        align-self: center;
+      }
+    }
+  </style>
 </head>
 <body>
 
   <header class="hero">
 
-    <!-- Top bar -->
     <div class="hero-topbar">
       <span class="hero-name">RBobloxian5542</span>
       <span class="hero-label">Portfolio</span>
     </div>
 
-    <!-- Main content -->
     <div class="hero-content">
 
-      <!-- Left side -->
       <div class="hero-left">
-
         <h1 class="hero-title">
           Roblox<br>
           Scripter
         </h1>
-
         <p class="hero-desc">
           I'm a Roblox scripter with experience building trendy games
           from the ground up. Specialized in game systems, networking,
           UI, and bringing complete experiences to life.
         </p>
-
-        <!-- Social links -->
         <div class="hero-socials">
 
           <a href="https://www.roblox.com/users/7539349290/profile" target="_blank" class="social-link">
@@ -55,17 +213,14 @@
           </a>
 
         </div>
-
       </div>
 
-      <!-- Right side — avatar -->
       <div class="hero-right">
         <img src="Images/RobloxAvatar.png" alt="Roblox Avatar" class="avatar">
       </div>
 
     </div>
 
-    <!-- Scroll arrow -->
     <div class="hero-scroll">&#8595;</div>
 
   </header>
