@@ -95,7 +95,7 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       padding: 0.4rem 1rem;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
       background: transparent;
       color: var(--text-dim);
       cursor: pointer;
@@ -105,7 +105,7 @@
 
     .filter-btn:hover {
       color: var(--text);
-      border-color: rgba(255,255,255,0.45);
+      border-color: rgba(255,255,255,0.6);
     }
 
     .filter-btn.active                                  { color: var(--text);        border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); }
@@ -135,6 +135,11 @@
     .game-card:hover {
       transform: translateY(-3px);
       border-color: rgba(255,255,255,0.15);
+    }
+
+    /* stop ALL transitions on anything inside the card except the card itself */
+    .game-card * {
+      transition: none !important;
     }
 
     .game-thumb {
