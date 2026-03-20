@@ -29,7 +29,7 @@
     .hero {
       display: flex;
       flex-direction: column;
-      padding: 2rem 5vw 1.5rem;
+      padding: 2rem 5vw 0;
     }
 
     /* top bar */
@@ -128,7 +128,7 @@
       align-items: flex-end;
       justify-content: center;
       width: 380px;
-      min-height: 400px;
+      min-height: 500px;
       overflow: visible;
     }
 
@@ -138,9 +138,9 @@
       position: absolute;
       inset: 0;
       background-image:
-        linear-gradient(var(--grid) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+      background-size: 36px 36px;
       z-index: 0;
     }
 
@@ -149,13 +149,13 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, var(--bg) 80%);
+      background: radial-gradient(ellipse at center, transparent 35%, var(--bg) 75%);
       z-index: 1;
       pointer-events: none;
     }
 
     .avatar {
-      height: 480px;
+      height: 560px;
       width: auto;
       object-fit: contain;
       display: block;
