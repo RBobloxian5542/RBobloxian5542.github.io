@@ -129,15 +129,13 @@
       text-decoration: none;
       color: inherit;
       display: block;
-      transition: transform 0.2s, border-color 0.2s;
+      transition: transform 0.2s;
     }
 
     .game-card:hover {
       transform: translateY(-3px);
-      border-color: rgba(255,255,255,0.15);
     }
 
-    /* stop ALL transitions on anything inside the card except the card itself */
     .game-card * {
       transition: none !important;
     }
