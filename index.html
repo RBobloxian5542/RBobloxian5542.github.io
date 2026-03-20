@@ -27,7 +27,6 @@
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       padding: 2rem 5vw 1.5rem;
@@ -164,19 +163,6 @@
       z-index: 2;
     }
 
-    /* scroll arrow */
-    .hero-scroll {
-      text-align: center;
-      font-size: 1.2rem;
-      color: var(--text-dim);
-      padding: 1rem 0 0.5rem;
-      animation: bounce 2s ease-in-out infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(6px); }
-    }
 
     /* responsive */
     @media (max-width: 768px) {
@@ -288,7 +274,7 @@
 
     </div>
 
-    <div class="hero-scroll">&#8595;</div>
+
 
   </header>
 
@@ -297,17 +283,17 @@
 
     <a href="#games" class="cat-btn">
       <img src="Images/ButtonGames.png" alt="Games">
-      <span class="cat-btn-label">Games Worked On</span>
+      <span class="cat-btn-label">Games</span>
     </a>
 
     <a href="#systems" class="cat-btn">
       <img src="Images/ButtonSystems.png" alt="Systems">
-      <span class="cat-btn-label">Systems</span>
+      <span class="cat-btn-label">Game Systems</span>
     </a>
 
     <a href="#ui" class="cat-btn">
       <img src="Images/ButtonUI.png" alt="UI">
-      <span class="cat-btn-label">UI Scripting</span>
+      <span class="cat-btn-label">UI Animations (UX)</span>
     </a>
 
   </section>
