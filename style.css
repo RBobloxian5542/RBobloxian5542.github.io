@@ -5,10 +5,9 @@
 
 /* --- Variables --- */
 :root {
-  --bg:        #0a0a0a;
-  --text:      #f0ead8;
-  --pink:      #ff6eb4;
-  --text-dim:  #888888;
+  --bg:         #0a0a0a;
+  --text:       #f0ead8;
+  --text-dim:   #999999;
   --font-title: 'Bebas Neue', sans-serif;
   --font-body:  'DM Mono', monospace;
 }
@@ -44,32 +43,27 @@ body {
   overflow: hidden;
 }
 
-/* Pink glow behind avatar */
-.hero::after {
-  content: '';
-  position: absolute;
-  right: 10vw;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(255, 110, 180, 0.07) 0%, transparent 70%);
-  pointer-events: none;
-}
-
 /* --- Top bar --- */
 .hero-topbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 6vh;
+  margin-bottom: 5vh;
 }
 
-.hero-name,
+.hero-name {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text);
+  font-weight: 400;
+}
+
 .hero-label {
   font-family: var(--font-body);
   font-size: 0.75rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--text-dim);
 }
@@ -86,42 +80,58 @@ body {
 /* --- Left --- */
 .hero-left {
   flex: 1;
-  max-width: 600px;
+  max-width: 580px;
 }
 
 .hero-title {
   font-family: var(--font-title);
-  font-size: clamp(5rem, 11vw, 10rem);
+  font-size: clamp(4.5rem, 9vw, 9rem);
   line-height: 0.92;
   color: var(--text);
   margin-bottom: 2rem;
-}
-
-.hero-title .accent {
-  color: var(--pink);
+  letter-spacing: 0.01em;
 }
 
 .hero-desc {
   font-size: 0.82rem;
   line-height: 1.85;
   color: var(--text-dim);
-  max-width: 420px;
+  max-width: 440px;
   margin-bottom: 2.5rem;
   text-align: justify;
 }
 
-.hero-discord {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.7rem;
-  color: var(--text);
-  font-size: 0.9rem;
-  letter-spacing: 0.04em;
+/* --- Socials --- */
+.hero-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.discord-icon {
-  width: 32px;
-  height: 32px;
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  transition: opacity 0.2s;
+  width: fit-content;
+}
+
+.social-link:hover {
+  opacity: 0.7;
+}
+
+.social-link.no-link {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.social-icon {
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
@@ -167,11 +177,11 @@ body {
   }
 
   .hero-title {
-    font-size: clamp(4rem, 18vw, 6rem);
+    font-size: clamp(3.5rem, 16vw, 5.5rem);
   }
 
   .avatar {
-    height: 300px;
+    height: 280px;
   }
 
   .hero-right {
