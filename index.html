@@ -9,21 +9,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg:        #0a0a0a;
-      --text:      #f0ead8;
-      --text-dim:  #999999;
+      --bg:       #0a0a0a;
+      --text:     #f0ead8;
+      --text-dim: #888888;
+      --grid:     rgba(255, 255, 255, 0.04);
     }
 
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      width: 100%;
-      min-height: 100%;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100%; }
 
     body {
       background: var(--bg);
@@ -37,7 +30,7 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 2.5rem 6vw;
+      padding: 2rem 5vw 1.5rem;
     }
 
     /* top bar */
@@ -45,20 +38,18 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6vh;
+      margin-bottom: 3vh;
     }
 
     .hero-name {
-      font-family: 'DM Mono', monospace;
-      font-size: 1rem;
+      font-size: 0.9rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
       color: var(--text);
     }
 
     .hero-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-dim);
@@ -70,107 +61,135 @@
       justify-content: space-between;
       align-items: center;
       flex: 1;
-      gap: 4vw;
+      gap: 2vw;
     }
 
     /* left */
     .hero-left {
       flex: 1;
-      max-width: 580px;
+      max-width: 520px;
     }
 
     .hero-title {
       font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4.5rem, 9vw, 9rem);
-      line-height: 0.92;
+      font-size: clamp(4rem, 8.5vw, 8.5rem);
+      line-height: 0.9;
       color: var(--text);
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       letter-spacing: 0.01em;
     }
 
     .hero-desc {
-      font-size: 0.82rem;
-      line-height: 1.85;
+      font-size: 0.78rem;
+      line-height: 1.8;
       color: var(--text-dim);
-      max-width: 440px;
-      margin-bottom: 2.5rem;
-      text-align: justify;
+      max-width: 400px;
+      margin-bottom: 2rem;
     }
 
-    /* socials */
+    /* socials — horizontal row */
     .hero-socials {
       display: flex;
-      flex-direction: column;
-      gap: 0.85rem;
+      flex-direction: row;
+      gap: 1.8rem;
+      align-items: center;
     }
 
     .social-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.55rem;
       text-decoration: none;
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.8rem;
       letter-spacing: 0.04em;
       transition: opacity 0.2s;
-      width: fit-content;
     }
 
-    .social-link:hover { opacity: 0.6; }
+    .social-link:hover { opacity: 0.55; }
 
     .social-link.no-link {
       cursor: default;
-      opacity: 0.55;
+      opacity: 0.5;
     }
 
     .social-icon {
-      width: 30px;
-      height: 30px;
+      width: 22px;
+      height: 22px;
       object-fit: contain;
     }
 
-    /* right */
+    /* right — avatar with grid bg */
     .hero-right {
       flex: 0 0 auto;
+      position: relative;
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      width: 420px;
+      height: 520px;
+    }
+
+    /* geometric grid background */
+    .hero-right::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 40px 40px;
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 2px;
+      z-index: 0;
+    }
+
+    /* fade grid at edges */
+    .hero-right::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, var(--bg) 100%);
+      z-index: 1;
+      pointer-events: none;
     }
 
     .avatar {
-      height: 520px;
+      height: 500px;
       width: auto;
       object-fit: contain;
       display: block;
+      position: relative;
+      z-index: 2;
     }
 
     /* scroll arrow */
     .hero-scroll {
       text-align: center;
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       color: var(--text-dim);
-      padding-bottom: 0.5rem;
+      padding: 1rem 0 0.5rem;
       animation: bounce 2s ease-in-out infinite;
     }
 
     @keyframes bounce {
       0%, 100% { transform: translateY(0); }
-      50%       { transform: translateY(7px); }
+      50%       { transform: translateY(6px); }
     }
 
     /* responsive */
     @media (max-width: 768px) {
       .hero-content {
         flex-direction: column-reverse;
-        align-items: flex-start;
-        gap: 2.5rem;
-      }
-      .avatar {
-        height: 260px;
+        align-items: center;
+        gap: 2rem;
       }
       .hero-right {
-        align-self: center;
+        width: 280px;
+        height: 340px;
       }
+      .avatar { height: 320px; }
+      .hero-socials { flex-wrap: wrap; gap: 1.2rem; }
     }
   </style>
 </head>
@@ -191,9 +210,10 @@
           Scripter
         </h1>
         <p class="hero-desc">
-          I'm a Roblox scripter with experience building trendy games
-          from the ground up. Specialized in game systems, networking,
-          UI, and bringing complete experiences to life.
+          I'm a Roblox scripter with over a year of experience,
+          focused on building trendy, polished games. I take
+          pride in writing clean systems that bring full
+          experiences to life.
         </p>
         <div class="hero-socials">
 
@@ -202,15 +222,15 @@
             <span>RBobloxian5542</span>
           </a>
 
-          <div class="social-link no-link">
-            <img src="Images/Discord.png" alt="Discord" class="social-icon">
-            <span>RBobloxian5542</span>
-          </div>
-
           <a href="https://x.com/RBobloxian5542" target="_blank" class="social-link">
             <img src="Images/X.png" alt="X" class="social-icon">
             <span>RBobloxian5542</span>
           </a>
+
+          <div class="social-link no-link">
+            <img src="Images/Discord.png" alt="Discord" class="social-icon">
+            <span>RBobloxian5542</span>
+          </div>
 
         </div>
       </div>
