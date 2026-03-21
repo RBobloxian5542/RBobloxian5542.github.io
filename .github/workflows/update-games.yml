@@ -39,17 +39,19 @@ jobs:
           }
 
           async function main() {
-            const [gamesData, thumbsData] = await Promise.all([
+            const [gamesData, thumbsData, placeData] = await Promise.all([
               get('https://games.roblox.com/v1/games?universeIds=' + ids.join(',')),
-              get('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' + ids.join(',') + '&size=768x432&format=Jpeg&isCircular=false')
+              get('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' + ids.join(',') + '&size=768x432&format=Jpeg&isCircular=false'),
+              get('https://games.roblox.com/v1/games/multiget-place-details?placeIds=' + ids.join(','))
             ]);
 
             const updated = games.map(g => {
               const info  = (gamesData.data  || []).find(d => String(d.id)         === String(g.universeId));
               const thumb = (thumbsData.data || []).find(d => String(d.universeId) === String(g.universeId));
+              const place = (Array.isArray(placeData) ? placeData : []).find(d => String(d.universeId) === String(g.universeId));
               const title = info?.name || g.title || 'Unknown';
               const slug  = g.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-              const isPrivate = !info;
+              const isPrivate = place ? !place.isPlayable : (info ? !info.isPlayable : false);
               return {
                 ...g,
                 title,
