@@ -1,5 +1,6 @@
 [
   {
+    "order": 1,
     "universeId": "9667516234",
     "tag": "Part Time",
     "title": "Escape Flood for Brainrots",
@@ -12,6 +13,7 @@
     "videos": []
   },
   {
+    "order": 2,
     "universeId": "9080410211",
     "tag": "Lead Developer",
     "title": "Explode A Brainrot",
@@ -20,17 +22,14 @@
     "link": "https://www.roblox.com/games/133692635742123",
     "slug": "explode-a-brainrot",
     "description": "Lead developer on Explode A Brainrot — scripted every system from scratch.\n\nBombs\n• Bomb throwing system with trajectory\n• Bomb shop\n\nBrainrot\n• Brainrot spawning and client-side replication with mutations and traits\n• Brainrot placer\n\nSystems\n• Custom inventory system\n• Event system (Traits)\n• Clean Tutorial System\n• Offline rewards\n• Plot upgrades\n• Codes\n• Timed Quests\n\nUX\n• UI animations\n\nOther\n• Leaderboards\n• Admin panel\n\n(Built on a custom module loader)",
-    "screenshots": [
-      "Images/Showcases/ExplodeABrainrot/Robloxx.png"
-    ],
-    "videos": [
-      "https://youtu.be/1dwfqc_ZN6c"
-    ]
+    "screenshots": ["Images/Showcases/ExplodeABrainrot/Robloxx.png"],
+    "videos": ["https://youtu.be/1dwfqc_ZN6c"]
   },
   {
+    "order": 3,
     "universeId": "8773070016",
     "tag": "Part Time",
-    "title": "Grow a Bomb 🎃 ",
+    "title": "Grow a Bomb 🎃",
     "visits": 125232,
     "thumb": "https://tr.rbxcdn.com/180DAY-6a80a064e75936381ceab6cc8e270e17/768/432/Image/Jpeg/noFilter",
     "link": "https://www.roblox.com/games/88174070090932",
@@ -40,6 +39,7 @@
     "videos": []
   },
   {
+    "order": 4,
     "universeId": "8280612564",
     "tag": "Lead Developer",
     "title": "Steal & Feed A Animal [DEMO]",
