@@ -1,0 +1,66 @@
+name: Update Games Data
+
+on:
+  schedule:
+    - cron: '0 6 * * *'  # runs every day at 6am UTC
+  workflow_dispatch:       # lets you trigger it manually too
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Fetch Roblox data and update games.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const https = require('https');
+
+          const games = JSON.parse(fs.readFileSync('games.json', 'utf8'));
+          const ids = games.map(g => g.universeId).filter(Boolean);
+
+          if (ids.length === 0) { console.log('No universe IDs'); process.exit(0); }
+
+          function get(url) {
+            return new Promise((resolve, reject) => {
+              https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
+                let data = '';
+                res.on('data', chunk => data += chunk);
+                res.on('end', () => resolve(JSON.parse(data)));
+              }).on('error', reject);
+            });
+          }
+
+          async function main() {
+            const [gamesData, thumbsData] = await Promise.all([
+              get('https://games.roblox.com/v1/games?universeIds=' + ids.join(',')),
+              get('https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=' + ids.join(',') + '&size=768x432&format=Jpeg&isCircular=false')
+            ]);
+
+            const updated = games.map(g => {
+              const info  = (gamesData.data  || []).find(d => String(d.id)         === String(g.universeId));
+              const thumb = (thumbsData.data || []).find(d => String(d.universeId) === String(g.universeId));
+              return {
+                ...g,
+                title:  info?.name                    || g.title  || 'Unknown',
+                visits: info?.visits                  || g.visits || 0,
+                thumb:  thumb?.thumbnails?.[0]?.imageUrl || g.thumb || null,
+                link:   info?.rootPlaceId ? 'https://www.roblox.com/games/' + info.rootPlaceId : g.link || '#'
+              };
+            });
+
+            fs.writeFileSync('games.json', JSON.stringify(updated, null, 2));
+            console.log('Done!');
+          }
+
+          main().catch(e => { console.error(e); process.exit(1); });
+          "
+
+      - name: Commit updated games.json
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add games.json
+          git diff --staged --quiet || git commit -m "Auto update games data"
+          git push
