@@ -4,9 +4,9 @@
     "title": "Placeholder UI",
     "tag": "UI",
     "thumb": null,
+    "imageFolder": "PlaceholderUI",
     "slug": "placeholder-ui",
     "description": "Description of this UI work.",
-    "screenshots": [],
     "videos": [],
     "repo": "https://github.com/RBobloxian5542"
   },
@@ -15,9 +15,9 @@
     "title": "Placeholder Effect",
     "tag": "Effect",
     "thumb": null,
+    "imageFolder": "PlaceholderEffect",
     "slug": "placeholder-effect",
     "description": "Description of this effect.",
-    "screenshots": [],
     "videos": [],
     "repo": "https://github.com/RBobloxian5542"
   }
