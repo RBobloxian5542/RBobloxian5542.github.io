@@ -15,7 +15,7 @@
       --text:        #f0ead8;
       --text-dim:    #777;
       --tag-lead:    #ff6eb4;
-      --tag-contrib: #60a5fa;
+      --tag-commission: #60a5fa;
       --tag-part:    #a78bfa;
     }
 
@@ -110,7 +110,7 @@
 
     .filter-btn.active                                  { color: var(--text);        border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); }
     .filter-btn[data-filter="Lead Developer"].active    { color: var(--tag-lead);    border-color: var(--tag-lead); }
-    .filter-btn[data-filter="Contribution"].active      { color: var(--tag-contrib); border-color: var(--tag-contrib); }
+    .filter-btn[data-filter="Commission"].active      { color: var(--tag-commission); border-color: var(--tag-commission); }
     .filter-btn[data-filter="Part Time"].active         { color: var(--tag-part);    border-color: var(--tag-part); }
 
     /* ── GRID ── */
@@ -183,7 +183,7 @@
     }
 
     .game-tag.Lead         { color: var(--tag-lead);    border-color: var(--tag-lead);    background: rgba(255,110,180,0.07); }
-    .game-tag.Contribution { color: var(--tag-contrib); border-color: var(--tag-contrib); background: rgba(96,165,250,0.07); }
+    .game-tag.Commission { color: var(--tag-commission); border-color: var(--tag-commission); background: rgba(96,165,250,0.07); }
     .game-tag.Part-Time    { color: var(--tag-part);    border-color: var(--tag-part);    background: rgba(167,139,250,0.07); }
 
     .game-title {
@@ -225,7 +225,7 @@
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="Lead Developer">Lead Developer</button>
     <button class="filter-btn" data-filter="Part Time">Part Time</button>
-    <button class="filter-btn" data-filter="Contribution">Contribution</button>
+    <button class="filter-btn" data-filter="Commission">Commission</button>
   </div>
 
   <div class="games-grid" id="games-grid">
@@ -233,8 +233,8 @@
   </div>
 
   <script>
-    const tagOrder = { 'Lead Developer': 0, 'Part Time': 1, 'Contribution': 2 };
-    const tagClass = { 'Lead Developer': 'Lead', 'Part Time': 'Part-Time', 'Contribution': 'Contribution' };
+    const tagOrder = { 'Lead Developer': 0, 'Part Time': 1, 'Commission': 2 };
+    const tagClass = { 'Lead Developer': 'Lead', 'Part Time': 'Part-Time', 'Commission': 'Commission' };
 
     function formatVisits(n) {
       n = parseInt(n);
@@ -268,7 +268,7 @@
         games.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
         grid.innerHTML = games.map(g => {
-          const cls    = tagClass[g.tag] || 'Contribution';
+          const cls    = tagClass[g.tag] || 'Commission';
           const visits = formatVisits(g.visits);
           const thumb  = g.thumb
             ? `<img class="game-thumb" src="${g.thumb}" alt="${g.title}">`
