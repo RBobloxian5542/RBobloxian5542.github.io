@@ -284,7 +284,7 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.92);
+      background: rgba(0,0,0,0.6);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -292,7 +292,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
-      backdrop-filter: blur(8px);
+      backdrop-filter: blur(4px);
     }
 
     .lightbox.active {
@@ -467,34 +467,28 @@
     }
 
     // ── LIGHTBOX ──
-    document.addEventListener('DOMContentLoaded', () => {
+    function openLightbox(src) {
       const lightbox    = document.getElementById('lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
+      lightboxImg.src = src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-      window.openLightbox = function(src) {
-        lightboxImg.src = src;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
+    function closeLightbox() {
+      const lightbox = document.getElementById('lightbox');
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
 
-      function closeLightbox() {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      lightbox.addEventListener('click', e => {
-        if (e.target !== lightboxImg) closeLightbox();
-      });
-
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closeLightbox();
-      });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <img id="lightbox-img" src="" alt="Screenshot">
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Screenshot" onclick="event.stopPropagation()">
   </div>
 
 </body>
