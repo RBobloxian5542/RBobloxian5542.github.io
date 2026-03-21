@@ -1,12 +1,22 @@
 [
   {
+    "order": 1,
     "title": "Tutorial System",
     "broadDescription": "Guided new player onboarding",
     "slug": "tutorial-system",
     "thumb": null,
-    "description": "Description here lol",
+    "description": "Description of the tutorial system.",
     "screenshots": [],
-    "videos": [],
-    "repo": "https://github.com/RBobloxian5542"
+    "videos": []
+  },
+  {
+    "order": 2,
+    "title": "Sea System",
+    "broadDescription": "Trochoidal wave simulation",
+    "slug": "sea-system",
+    "thumb": null,
+    "description": "Description of the sea system.",
+    "screenshots": [],
+    "videos": []
   }
 ]
