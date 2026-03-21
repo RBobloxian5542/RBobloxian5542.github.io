@@ -389,7 +389,9 @@
 
           // Description
           if (game.description) {
-            document.getElementById('game-description').textContent = game.description;
+            const desc = document.getElementById('game-description');
+            desc.style.whiteSpace = 'pre-line';
+            desc.textContent = game.description;
           }
 
           // Screenshots
