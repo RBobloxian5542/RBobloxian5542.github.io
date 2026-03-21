@@ -447,14 +447,29 @@
             screenshotsGrid.innerHTML = game.screenshots.map((src, i) =>
               `<img class="screenshot-img" src="../${src}" alt="Screenshot ${i + 1}" onclick="openLightbox(this.src)">`
             ).join('');
+          } else {
+            document.getElementById('screenshots-section').style.display = 'none';
           }
 
           // Videos
           const videosGrid = document.getElementById('videos-grid');
           if (game.videos && game.videos.length > 0) {
-            videosGrid.innerHTML = game.videos.map(url =>
-              `<iframe src="${url}" frameborder="0" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:2px;"></iframe>`
-            ).join('');
+            videosGrid.innerHTML = game.videos.map(url => {
+              let embedUrl = url;
+              if (url.includes('streamable.com') && !url.includes('/e/')) {
+                embedUrl = url.replace('streamable.com/', 'streamable.com/e/');
+              } else if (url.includes('youtube.com/watch')) {
+                const id = new URL(url).searchParams.get('v');
+                embedUrl = `https://www.youtube.com/embed/${id}`;
+              } else if (url.includes('youtu.be/')) {
+                const id = url.split('youtu.be/')[1].split('?')[0];
+                embedUrl = `https://www.youtube.com/embed/${id}`;
+              }
+              // Cloudflare Stream URLs (iframe.videodelivery.net) work as-is
+              return `<iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="autoplay" style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;"></iframe>`;
+            }).join('');
+          } else {
+            document.getElementById('videos-section').style.display = 'none';
           }
         })
         .catch(() => {
