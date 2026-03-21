@@ -221,6 +221,7 @@
     fetch('../ui.json')
       .then(r => r.json())
       .then(items => {
+        items.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
         grid.innerHTML = items.map(g => {
           const cls   = tagClass[g.tag] || 'UI';
           const thumb = g.thumb
