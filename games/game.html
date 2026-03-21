@@ -280,6 +280,101 @@
       fill: rgba(255,255,255,0.1);
     }
 
+    /* ── YOUTUBE FACADE ── */
+    .yt-facade {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #000;
+    }
+
+    .yt-facade img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s;
+    }
+
+    .yt-facade:hover img { opacity: 0.75; }
+
+    .yt-play {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .yt-play svg {
+      width: 68px;
+      height: 48px;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5));
+      transition: transform 0.2s;
+    }
+
+    .yt-facade:hover .yt-play svg { transform: scale(1.1); }
+
+    /* ── VIDEO MODAL ── */
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .video-modal.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .video-modal-inner {
+      width: 85vw;
+      max-width: 1100px;
+      aspect-ratio: 16/9;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    .video-modal.active .video-modal-inner { transform: scale(1); }
+
+    .video-modal-inner iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 3px;
+      display: block;
+    }
+
+    .video-modal-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      font-family: 'DM Mono', monospace;
+    }
+
+    .video-modal-close:hover { color: #fff; }
+
     /* ── LIGHTBOX ── */
     .lightbox {
       position: fixed;
@@ -455,18 +550,29 @@
           const videosGrid = document.getElementById('videos-grid');
           if (game.videos && game.videos.length > 0) {
             videosGrid.innerHTML = game.videos.map(url => {
-              let embedUrl = url;
-              if (url.includes('streamable.com') && !url.includes('/e/')) {
-                embedUrl = url.replace('streamable.com/', 'streamable.com/e/');
-              } else if (url.includes('youtube.com/watch')) {
-                const id = new URL(url).searchParams.get('v');
-                embedUrl = `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0&iv_load_policy=3&disablekb=1`;
-              } else if (url.includes('youtu.be/')) {
-                const id = url.split('youtu.be/')[1].split('?')[0];
-                embedUrl = `https://www.youtube.com/embed/${id}?modestbranding=1&rel=0&iv_load_policy=3&disablekb=1`;
+              // Local mp4
+              if (url.endsWith('.mp4') || url.endsWith('.webm')) {
+                return `<video controls style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;background:#000;"><source src="../${url}" type="video/mp4"></video>`;
               }
-              // Cloudflare Stream URLs (iframe.videodelivery.net) work as-is
-              return `<iframe src="${embedUrl}" frameborder="0" allowfullscreen allow="autoplay" style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;"></iframe>`;
+              // YouTube facade
+              let ytId = null;
+              if (url.includes('youtube.com/watch')) ytId = new URL(url).searchParams.get('v');
+              else if (url.includes('youtu.be/')) ytId = url.split('youtu.be/')[1].split('?')[0];
+              if (ytId) {
+                const thumb = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+                const embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3`;
+                return `
+                  <div class="yt-facade" onclick="openVideoModal('${embedUrl}')">
+                    <img src="${thumb}" alt="Video">
+                    <div class="yt-play">
+                      <svg viewBox="0 0 68 48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+                    </div>
+                  </div>`;
+              }
+              // Streamable fallback
+              let embedUrl = url;
+              if (url.includes('streamable.com') && !url.includes('/e/')) embedUrl = url.replace('streamable.com/', 'streamable.com/e/');
+              return `<iframe src="${embedUrl}" frameborder="0" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;"></iframe>`;
             }).join('');
           } else {
             document.getElementById('videos-section').style.display = 'none';
@@ -475,6 +581,19 @@
         .catch(() => {
           document.getElementById('game-title').textContent = 'Could not load game data';
         });
+    }
+
+    // ── VIDEO MODAL ──
+    function openVideoModal(src) {
+      document.getElementById('video-modal-iframe').src = src;
+      document.getElementById('video-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideoModal() {
+      document.getElementById('video-modal-iframe').src = '';
+      document.getElementById('video-modal').classList.remove('active');
+      document.body.style.overflow = '';
     }
 
     // ── LIGHTBOX ──
@@ -493,9 +612,17 @@
     }
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Escape') { closeLightbox(); closeVideoModal(); }
     });
   </script>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="video-modal" onclick="closeVideoModal()">
+    <div class="video-modal-inner" onclick="event.stopPropagation()">
+      <button class="video-modal-close" onclick="closeVideoModal()">✕ Close</button>
+      <iframe id="video-modal-iframe" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" onclick="closeLightbox()">
