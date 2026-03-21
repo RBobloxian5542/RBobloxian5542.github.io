@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Systems — RBobloxian5542</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:       #0d0d0f;
+      --bg2:      #131316;
+      --bg3:      #1a1a1e;
+      --text:     #f0ead8;
+      --text-dim: #777;
+      --accent:   #f0ead8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; background: var(--bg); }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 5vw;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: var(--bg2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    .topbar-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .page-header { padding: 3.5rem 5vw 2rem; }
+
+    .page-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    .filters {
+      display: flex;
+      gap: 0.6rem;
+      padding: 0 5vw 2.5rem;
+    }
+
+    .filter-btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: transparent;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+      border-radius: 1px;
+    }
+
+    .filter-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.6); }
+    .filter-btn.active { color: var(--text); border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+      padding: 0 5vw 5rem;
+    }
+
+    .card {
+      background: var(--bg2);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 2px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.2s;
+      will-change: transform;
+    }
+
+    .card:hover { transform: translateY(-3px); }
+    .card * { transition: none !important; }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--bg3);
+    }
+
+    .card-thumb-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .card-info { padding: 0.9rem 1rem 1rem; }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+    }
+
+    .card-broad {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+    }
+
+    .card.hidden { display: none; }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <a href="https://rbobloxian5542.github.io" class="back-btn">← Back</a>
+    <span class="topbar-title">RBobloxian5542 — Game Systems</span>
+  </nav>
+
+  <div class="page-header">
+    <h1>Game Systems</h1>
+    <p>Systems and mechanics I've built.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <div style="color:var(--text-dim);font-size:0.75rem;letter-spacing:0.1em;">Loading...</div>
+  </div>
+
+  <script>
+    fetch('../systems.json')
+      .then(r => r.json())
+      .then(items => {
+        const grid = document.getElementById('grid');
+        grid.innerHTML = items.map(s => {
+          const thumb = s.thumb
+            ? `<img class="card-thumb" src="../${s.thumb}" alt="${s.title}">`
+            : `<div class="card-thumb-placeholder">No Thumbnail</div>`;
+          const href = s.slug ? `system.html?system=${s.slug}` : '#';
+
+          return `
+            <a href="${href}" class="card">
+              ${thumb}
+              <div class="card-info">
+                <div class="card-title">${s.title}</div>
+                <div class="card-broad">${s.broadDescription || ''}</div>
+              </div>
+            </a>`;
+        }).join('');
+      })
+      .catch(() => {
+        document.getElementById('grid').innerHTML = '<div style="color:var(--text-dim);font-size:0.75rem;">Could not load systems.json</div>';
+      });
+  </script>
+
+</body>
+</html>
