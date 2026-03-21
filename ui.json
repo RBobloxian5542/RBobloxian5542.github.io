@@ -3,7 +3,7 @@
     "order": 1,
     "title": "Placeholder UI",
     "tag": "UI",
-    "thumb": null,
+    "thumb": "TestThumb",
     "imageFolder": "PlaceholderUI",
     "slug": "placeholder-ui",
     "description": "Description of this UI work.",
