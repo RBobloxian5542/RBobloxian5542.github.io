@@ -11,7 +11,7 @@
     "description": "One of the scripters on this experience.\n\nSystems\n• Speed and Carry Upgrade Shop\n• Inventory System\n• Sell System\n• Brainrot Index\n• Tutorial\n• Brainrot rarity stealing (for Robux)",
     "screenshots": [],
     "videos": [],
-    "private": true
+    "private": false
   },
   {
     "order": 2,
@@ -29,7 +29,7 @@
     "videos": [
       "https://youtu.be/1dwfqc_ZN6c"
     ],
-    "private": true
+    "private": false
   },
   {
     "order": 3,
@@ -43,7 +43,7 @@
     "description": "One of the scripters on this experience.\n\nPlot Placement System\n• Grid snapping and rotation support\n\nShops\n• Bombs, Bases and Exclusive shop\n• Global restock cycles and player-specific restock via Developer Products\n\nGlobal Leaderboards\n• Kills, Deaths, Robux Spent\n\nBase Systems\n• Base Around Plot mechanic with equippable bases\n• Percentage cash per second boost tied to equipped base\n\nEconomy\n• Cash Per Second (CPS) scaling with bombs placed\n• Offline cash system for returning players\n• Friend boost\n\nAdmin Tools\n• CMD system for testing and live moderation",
     "screenshots": [],
     "videos": [],
-    "private": true
+    "private": false
   },
   {
     "order": 4,
@@ -57,6 +57,6 @@
     "description": "Solo developer on Steal & Feed A Animal — created and scripted the entire game, except for the dynamic weather system.",
     "screenshots": [],
     "videos": [],
-    "private": true
+    "private": false
   }
 ]
