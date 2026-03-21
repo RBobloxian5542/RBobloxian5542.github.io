@@ -168,6 +168,14 @@
 
     .play-btn:hover { background: #0052cc; }
 
+    .play-btn.private {
+      background: #2a2a2a;
+      color: var(--text-dim);
+      cursor: default;
+      pointer-events: none;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
     .play-btn svg {
       width: 14px;
       height: 14px;
@@ -525,9 +533,18 @@
           tagEl.classList.add(tagCls);
 
           // Title, visits, link
-          document.getElementById('game-title').textContent   = game.title;
-          document.getElementById('game-visits').textContent  = formatVisits(game.visits);
-          document.getElementById('play-btn').href            = game.link || '#';
+          document.getElementById('game-title').textContent  = game.title;
+          document.getElementById('game-visits').textContent = formatVisits(game.visits);
+
+          const playBtn = document.getElementById('play-btn');
+          if (game.private) {
+            playBtn.classList.add('private');
+            playBtn.removeAttribute('href');
+            playBtn.querySelector('span') && (playBtn.querySelector('span').textContent = 'In Development');
+            playBtn.innerHTML = `<svg viewBox="0 0 16 16"><path d="M8 1a7 7 0 100 14A7 7 0 008 1zM7 5h2v5H7V5zm0 6h2v2H7v-2z" fill="currentColor"/></svg> In Development`;
+          } else {
+            playBtn.href = game.link || '#';
+          }
 
           // Description
           if (game.description) {
