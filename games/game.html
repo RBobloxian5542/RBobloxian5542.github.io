@@ -553,9 +553,9 @@
             desc.textContent = game.description;
           }
 
-          // Screenshots — auto load 1.png, 2.png... from Images/GameName/
+          // Screenshots — auto load 1.png, 2.png... from Images/Showcases/ImageFolder/
           const screenshotsGrid = document.getElementById('screenshots-grid');
-          const gameName = game.title.replace(/\s+/g, '');
+          const folderName = game.imageFolder || game.title.replace(/\s+/g, '');
           const extensions = ['png', 'jpg', 'jpeg'];
 
           async function loadScreenshots() {
@@ -564,7 +564,7 @@
             while (i <= 20) {
               let found = false;
               for (const ext of extensions) {
-                const src = `../Images/${gameName}/${i}.${ext}`;
+                const src = `../Images/Showcases/${folderName}/${i}.${ext}`;
                 const ok = await new Promise(res => {
                   const img = new Image();
                   img.onload  = () => res(true);
