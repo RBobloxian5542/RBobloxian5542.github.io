@@ -445,12 +445,8 @@
           const screenshotsGrid = document.getElementById('screenshots-grid');
           if (game.screenshots && game.screenshots.length > 0) {
             screenshotsGrid.innerHTML = game.screenshots.map((src, i) =>
-              `<img class="screenshot-img" src="../${src}" alt="Screenshot ${i + 1}">`
+              `<img class="screenshot-img" src="../${src}" alt="Screenshot ${i + 1}" onclick="openLightbox(this.src)">`
             ).join('');
-            // attach lightbox after rendering
-            screenshotsGrid.querySelectorAll('.screenshot-img').forEach(img => {
-              img.addEventListener('click', () => openLightbox(img.src));
-            });
           }
 
           // Videos
