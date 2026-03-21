@@ -398,9 +398,10 @@
           document.title = item.title + ' — RBobloxian5542';
           document.getElementById('topbar-name').textContent = item.title;
 
+          // Thumbnail — from Images/SystemThumbnails/thumbName
           const wrap = document.getElementById('thumb-wrap');
           wrap.innerHTML = item.thumb
-            ? `<img src="../${item.thumb}" alt="${item.title}">`
+            ? `<img src="../Images/SystemThumbnails/${item.thumb}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
             : `<div class="thumb-placeholder">No Thumbnail</div>`;
 
           document.getElementById('item-title').textContent = item.title;
@@ -419,20 +420,48 @@
             desc.textContent = item.description;
           }
 
-          // Screenshots
+          // Screenshots — auto load from Images/SystemShowcases/imageFolder/1.png
           const screenshotsGrid = document.getElementById('screenshots-grid');
-          if (item.screenshots && item.screenshots.length > 0) {
-            screenshotsGrid.innerHTML = item.screenshots.map((src, i) =>
-              `<img class="screenshot-img" src="../${src}" alt="Screenshot ${i + 1}" onclick="openLightbox(this.src)">`
-            ).join('');
-          } else {
-            document.getElementById('screenshots-section').style.display = 'none';
-          }
+          const folderName = item.imageFolder || '';
+          const extensions = ['png', 'jpg', 'jpeg'];
 
-          // Videos
+          async function loadScreenshots() {
+            if (!folderName) { document.getElementById('screenshots-section').style.display = 'none'; return; }
+            const imgs = [];
+            let i = 1;
+            while (i <= 20) {
+              let found = false;
+              for (const ext of extensions) {
+                const src = `../Images/SystemShowcases/${folderName}/${i}.${ext}`;
+                const ok = await new Promise(res => {
+                  const img = new Image();
+                  img.onload  = () => res(true);
+                  img.onerror = () => res(false);
+                  img.src = src;
+                });
+                if (ok) { imgs.push(src); found = true; break; }
+              }
+              if (!found) break;
+              i++;
+            }
+            if (imgs.length > 0) {
+              screenshotsGrid.innerHTML = imgs.map((src, i) =>
+                `<img class="screenshot-img" src="${src}" alt="Screenshot ${i + 1}" onclick="openLightbox(this.src)">`
+              ).join('');
+            } else {
+              document.getElementById('screenshots-section').style.display = 'none';
+            }
+          }
+          loadScreenshots();
+
+          // Videos with order support
           const videosGrid = document.getElementById('videos-grid');
           if (item.videos && item.videos.length > 0) {
-            videosGrid.innerHTML = item.videos.map(url => {
+            const sorted = item.videos
+              .map(v => typeof v === 'string' ? { order: 0, url: v } : v)
+              .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+            videosGrid.innerHTML = sorted.map(v => {
+              const url = v.url;
               if (url.endsWith('.mp4') || url.endsWith('.webm')) {
                 return `<video controls style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;background:#000;"><source src="../${url}" type="video/mp4"></video>`;
               }
