@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI & Effects — RBobloxian5542</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #0d0d0f;
+      --bg2:        #131316;
+      --bg3:        #1a1a1e;
+      --text:       #f0ead8;
+      --text-dim:   #777;
+      --tag-ui:     #34d399;
+      --tag-effect: #f59e0b;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; min-height: 100%; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 5vw;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      background: var(--bg2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .back-btn:hover { color: var(--text); }
+
+    .topbar-title {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      gap: 2rem;
+      padding: 3rem 5vw 2.5rem;
+      align-items: flex-start;
+    }
+
+    .thumb-wrap {
+      flex: 0 0 auto;
+      width: 45%;
+      max-width: 540px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--bg3);
+      aspect-ratio: 16/9;
+    }
+
+    .thumb-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .thumb-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .item-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      align-self: stretch;
+    }
+
+    .item-info-top {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .item-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border: 1px solid;
+      border-radius: 1px;
+      width: fit-content;
+    }
+
+    .item-tag.UI     { color: var(--tag-ui);     border-color: var(--tag-ui);     background: rgba(52,211,153,0.07); }
+    .item-tag.Effect { color: var(--tag-effect); border-color: var(--tag-effect); background: rgba(245,158,11,0.07); }
+
+    .item-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+      margin: 0 5vw;
+    }
+
+    /* ── CONTENT ── */
+    .content {
+      padding: 2.5rem 5vw 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .description-text {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      max-width: 680px;
+      background: var(--bg2);
+      padding: 1.5rem;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* screenshots */
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .screenshot-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      border: 1px dashed rgba(255,255,255,0.08);
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .screenshot-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .screenshot-img:hover { opacity: 0.85; }
+
+    /* videos */
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 0.8rem;
+    }
+
+    .video-placeholder {
+      aspect-ratio: 16/9;
+      background: var(--bg3);
+      border: 1px dashed rgba(255,255,255,0.08);
+      border-radius: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.15);
+    }
+
+    /* YouTube facade */
+    .yt-facade {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/9;
+      border-radius: 2px;
+      overflow: hidden;
+      cursor: pointer;
+      background: #000;
+    }
+    .yt-facade img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+    .yt-facade:hover img { opacity: 0.75; }
+    .yt-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
+    .yt-play svg { width: 68px; height: 48px; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.5)); transition: transform 0.2s; }
+    .yt-facade:hover .yt-play svg { transform: scale(1.1); }
+
+    /* Video modal */
+    .video-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .video-modal.active { opacity: 1; pointer-events: all; }
+    .video-modal-inner {
+      width: 85vw;
+      max-width: 1100px;
+      aspect-ratio: 16/9;
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+    .video-modal.active .video-modal-inner { transform: scale(1); }
+    .video-modal-inner iframe { width: 100%; height: 100%; border: none; border-radius: 3px; display: block; }
+    .video-modal-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      font-family: 'DM Mono', monospace;
+    }
+    .video-modal-close:hover { color: #fff; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .lightbox.active { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 87vw;
+      max-height: 87vh;
+      width: auto;
+      height: auto;
+      min-width: min(800px, 82vw);
+      object-fit: contain;
+      border-radius: 3px;
+      transform: scale(0.8);
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      display: block;
+    }
+    .lightbox.active img { transform: scale(1); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero { flex-direction: column; }
+      .thumb-wrap { width: 100%; max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="topbar">
+    <a href="https://rbobloxian5542.github.io/ui" class="back-btn">← UI & Effects</a>
+    <span class="topbar-title" id="topbar-name">Loading...</span>
+  </nav>
+
+  <div class="hero">
+    <div class="thumb-wrap" id="thumb-wrap">
+      <div class="thumb-placeholder">Loading...</div>
+    </div>
+    <div class="item-info">
+      <div class="item-info-top">
+        <div class="item-title" id="item-title">Loading...</div>
+        <span class="item-tag" id="item-tag">—</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="content">
+
+    <div>
+      <div class="section-label">Description</div>
+      <p class="description-text" id="item-description">No description yet.</p>
+    </div>
+
+    <div id="screenshots-section">
+      <div class="section-label">Screenshots</div>
+      <div class="screenshots-grid" id="screenshots-grid">
+        <div class="screenshot-placeholder">Screenshot 1</div>
+        <div class="screenshot-placeholder">Screenshot 2</div>
+      </div>
+    </div>
+
+    <div id="videos-section">
+      <div class="section-label">Video Showcase</div>
+      <div class="videos-grid" id="videos-grid">
+        <div class="video-placeholder">
+          <svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:rgba(255,255,255,0.1)"><path d="M8 5v14l11-7z"/></svg>
+          Video Coming Soon
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="video-modal" onclick="closeVideoModal()">
+    <div class="video-modal-inner" onclick="event.stopPropagation()">
+      <button class="video-modal-close" onclick="closeVideoModal()">✕ Close</button>
+      <iframe id="video-modal-iframe" src="" allowfullscreen allow="autoplay"></iframe>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="Screenshot" onclick="event.stopPropagation()">
+  </div>
+
+  <script>
+    const tagClass = { 'UI': 'UI', 'Effect': 'Effect' };
+
+    // Video Modal
+    function openVideoModal(src) {
+      document.getElementById('video-modal-iframe').src = src;
+      document.getElementById('video-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeVideoModal() {
+      document.getElementById('video-modal-iframe').src = '';
+      document.getElementById('video-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { closeLightbox(); closeVideoModal(); }
+    });
+
+    // Load item
+    const params = new URLSearchParams(window.location.search);
+    const slug   = params.get('item');
+
+    if (!slug) {
+      document.getElementById('item-title').textContent = 'Item not found';
+    } else {
+      fetch('../ui.json')
+        .then(r => r.json())
+        .then(items => {
+          const item = items.find(i => i.slug === slug);
+          if (!item) { document.getElementById('item-title').textContent = 'Item not found'; return; }
+
+          document.title = item.title + ' — RBobloxian5542';
+          document.getElementById('topbar-name').textContent = item.title;
+
+          // Thumbnail
+          const wrap = document.getElementById('thumb-wrap');
+          wrap.innerHTML = item.thumb
+            ? `<img src="../${item.thumb}" alt="${item.title}">`
+            : `<div class="thumb-placeholder">No Thumbnail</div>`;
+
+          // Tag
+          const tagEl  = document.getElementById('item-tag');
+          const tagCls = tagClass[item.tag] || 'UI';
+          tagEl.textContent = item.tag;
+          tagEl.classList.add(tagCls);
+
+          // Title
+          document.getElementById('item-title').textContent = item.title;
+
+          // Description
+          if (item.description) {
+            const desc = document.getElementById('item-description');
+            desc.style.whiteSpace = 'pre-line';
+            desc.textContent = item.description;
+          }
+
+          // Screenshots
+          const screenshotsGrid = document.getElementById('screenshots-grid');
+          if (item.screenshots && item.screenshots.length > 0) {
+            screenshotsGrid.innerHTML = item.screenshots.map((src, i) =>
+              `<img class="screenshot-img" src="../${src}" alt="Screenshot ${i + 1}" onclick="openLightbox(this.src)">`
+            ).join('');
+          } else {
+            document.getElementById('screenshots-section').style.display = 'none';
+          }
+
+          // Videos
+          const videosGrid = document.getElementById('videos-grid');
+          if (item.videos && item.videos.length > 0) {
+            videosGrid.innerHTML = item.videos.map(url => {
+              if (url.endsWith('.mp4') || url.endsWith('.webm')) {
+                return `<video controls style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;background:#000;"><source src="../${url}" type="video/mp4"></video>`;
+              }
+              let ytId = null;
+              if (url.includes('youtube.com/watch')) ytId = new URL(url).searchParams.get('v');
+              else if (url.includes('youtu.be/')) ytId = url.split('youtu.be/')[1].split('?')[0];
+              if (ytId) {
+                const thumb = `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`;
+                const embedUrl = `https://www.youtube.com/embed/${ytId}?autoplay=1&modestbranding=1&rel=0&iv_load_policy=3`;
+                return `
+                  <div class="yt-facade" onclick="openVideoModal('${embedUrl}')">
+                    <img src="${thumb}" alt="Video">
+                    <div class="yt-play">
+                      <svg viewBox="0 0 68 48"><path d="M66.5 7.7c-.8-2.9-3-5.2-5.9-6C55.8.1 34 0 34 0S12.2.1 7.4 1.7C4.5 2.5 2.3 4.8 1.5 7.7 0 12.5 0 24 0 24s0 11.5 1.5 16.3c.8 2.9 3 5.2 5.9 6C12.2 47.9 34 48 34 48s21.8-.1 26.6-1.7c2.9-.8 5.1-3.1 5.9-6C68 35.5 68 24 68 24s0-11.5-1.5-16.3z" fill="#ff0000"/><path d="M45 24 27 14v20" fill="#fff"/></svg>
+                    </div>
+                  </div>`;
+              }
+              let embedUrl = url;
+              if (url.includes('streamable.com') && !url.includes('/e/')) embedUrl = url.replace('streamable.com/', 'streamable.com/e/');
+              return `<iframe src="${embedUrl}" frameborder="0" allowfullscreen style="width:100%;aspect-ratio:16/9;border-radius:2px;display:block;"></iframe>`;
+            }).join('');
+          } else {
+            document.getElementById('videos-section').style.display = 'none';
+          }
+        })
+        .catch(() => {
+          document.getElementById('item-title').textContent = 'Could not load data';
+        });
+    }
+  </script>
+
+</body>
+</html>
