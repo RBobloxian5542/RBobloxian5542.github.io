@@ -273,10 +273,12 @@
           const thumb  = g.thumb
             ? `<img class="game-thumb" src="${g.thumb}" alt="${g.title}">`
             : `<div class="game-thumb-placeholder">No Thumbnail</div>`;
-          const href   = g.link || '#';
+        const href = g.slug
+          ? `game.html?game=${g.slug}`
+          : g.link || '#';
 
           return `
-            <a href="${href}" target="_blank" class="game-card" data-tag="${g.tag}">
+            <a href="${href}" class="game-card" data-tag="${g.tag}">
               ${thumb}
               <div class="game-info">
                 <span class="game-tag ${cls}">${g.tag}</span>
