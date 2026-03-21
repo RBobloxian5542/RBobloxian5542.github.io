@@ -85,8 +85,38 @@
       line-height: 1.8;
       color: var(--text-dim);
       max-width: 400px;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── AVAILABILITY BADGE (now under desc) ── */
+    .badge-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
       margin-bottom: 2rem;
     }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .badge-dot.green { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
+    .badge-dot.red   { background: #f87171; box-shadow: 0 0 6px #f87171; }
+    .badge-dot.grey  { background: #666; }
+
+    .badge-label { color: var(--text); }
 
     /* socials — horizontal row */
     .hero-socials {
@@ -155,7 +185,7 @@
     }
 
     .avatar {
-      height: 560px;
+      height: 640px;
       width: auto;
       object-fit: contain;
       display: block;
@@ -164,25 +194,22 @@
       max-width: 100%;
     }
 
+    /* divider between hero and buttons */
+    .hero-divider {
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+      margin: 0 5vw;
+    }
 
     /* responsive */
     @media (max-width: 900px) {
-      .hero-content {
-        flex-wrap: wrap;
-      }
-      .hero-right {
-        width: 280px;
-        min-height: 300px;
-      }
+      .hero-content { flex-wrap: wrap; }
+      .hero-right { width: 280px; min-height: 300px; }
       .avatar { height: 280px; }
     }
 
     @media (max-width: 768px) {
-      .hero-content {
-        flex-direction: column;
-        align-items: center;
-        gap: 2rem;
-      }
+      .hero-content { flex-direction: column; align-items: center; gap: 2rem; }
       .hero-right { width: 240px; min-height: 260px; }
       .avatar { height: 240px; }
       .hero-socials { flex-wrap: wrap; gap: 1.2rem; }
@@ -227,7 +254,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 1rem;
-      padding: 0 5vw 5rem;
+      padding: 4rem 5vw 5rem;
     }
 
     .cat-btn {
@@ -292,39 +319,36 @@
           I'm a Roblox scripter with over a year of experience,
           focused on building trendy, polished games.
         </p>
-        <div class="hero-socials">
 
+        <!-- Availability Badge — under description -->
+        <div class="badge-wrap">
+          <div class="badge-row">
+            <span class="badge-dot" id="status-dot"></span>
+            <span class="badge-label" id="status-text">Loading...</span>
+          </div>
+          <div class="badge-row">
+            <span class="badge-dot grey"></span>
+            <span>Availability: Can work everyday, more time on weekends</span>
+          </div>
+          <div class="badge-row">
+            <span class="badge-dot grey"></span>
+            <span id="badge-timezone">—</span>
+          </div>
+        </div>
+
+        <div class="hero-socials">
           <a href="https://www.roblox.com/users/7539349290/profile" target="_blank" class="social-link">
             <img src="Images/Roblox.png" alt="Roblox" class="social-icon">
             <span>RBobloxian5542</span>
           </a>
-
           <a href="https://x.com/RBobloxian5542" target="_blank" class="social-link">
             <img src="Images/X.png" alt="X" class="social-icon">
             <span>RBobloxian5542</span>
           </a>
-
           <div class="social-link no-link">
             <img src="Images/Discord.png" alt="Discord" class="social-icon">
             <span>RBobloxian5542</span>
           </div>
-
-        </div>
-      </div>
-
-      <!-- Availability Badge -->
-      <div class="badge-wrap">
-        <div class="badge-row">
-          <span class="badge-dot" id="status-dot"></span>
-          <span class="badge-label" id="status-text">Loading...</span>
-        </div>
-        <div class="badge-row badge-indent">
-          <span class="badge-dot grey"></span>
-          <span>Availability: Can work everyday, more time on weekends</span>
-        </div>
-        <div class="badge-row">
-          <span class="badge-dot grey"></span>
-          <span id="badge-timezone">—</span>
         </div>
       </div>
 
@@ -334,35 +358,30 @@
 
     </div>
 
-
-
   </header>
+
+  <div class="hero-divider"></div>
 
   <!-- Category Buttons -->
   <section class="categories">
-
     <a href="https://rbobloxian5542.github.io/games" class="cat-btn">
       <img src="Images/ButtonGames.png" alt="Games">
       <span class="cat-btn-label">Games</span>
     </a>
-
     <a href="https://rbobloxian5542.github.io/systems" class="cat-btn">
       <img src="Images/ButtonSystems.png" alt="Systems">
       <span class="cat-btn-label">Game Systems</span>
     </a>
-
     <a href="https://rbobloxian5542.github.io/ui" class="cat-btn">
       <img src="Images/ButtonUI.png" alt="UI">
       <span class="cat-btn-label">UI & Effects</span>
     </a>
-
   </section>
 
   <script>
     fetch('config.json')
       .then(r => r.json())
       .then(cfg => {
-        // Status
         const dot  = document.getElementById('status-dot');
         const text = document.getElementById('status-text');
         if (cfg.openToWork) {
@@ -373,7 +392,6 @@
           text.textContent = 'Not Available';
         }
 
-        // Live clock in my timezone
         const tz = cfg.timezone || 'UTC+1';
         const ianaMap = {
           'UTC+1': 'Europe/Prague', 'UTC+2': 'Europe/Helsinki',
