@@ -9,6 +9,6 @@
     "slug": "explode-a-brainrot",
     "description": "Lead developer on Explode A Brainrot — scripted every system from scratch.\n\nBombs\n• Bomb throwing system with trajectory\n• Bomb shop\n\nBrainrot\n• Brainrot spawning and client-side replication with mutations and traits\n• Brainrot placer\n\nSystems\n• Custom inventory system\n• Event system (Traits)\n• Clean Tutorial System\n• Offline rewards\n• Plot upgrades\n• Codes\n• Timed Quests\n\nUX\n• UI animations\n\nOther\n• Leaderboards\n• Admin panel\n\n(Built on a custom module loader)",
     "screenshots": ["Images/Showcases/ExplodeABrainrot/Robloxx.png"],
-    "videos": []
+    "videos": ["https://streamable.com/uj9anl"]
   }
 ]
