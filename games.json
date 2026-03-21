@@ -54,7 +54,9 @@
     "slug": "steal-and-feed-a-animal",
     "imageFolder": "StealAndFeedAAnimal",
     "description": "Solo developer on Steal & Feed A Animal — created and scripted the entire game, except for the dynamic weather system.",
-    "videos": [],
+    "videos": [
+      { "order": 1, "url": "https://youtu.be/qd9wVWKP7pQ" }
+    ],
     "private": false
   }
 ]
