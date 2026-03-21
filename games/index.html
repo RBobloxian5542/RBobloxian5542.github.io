@@ -265,7 +265,7 @@
     fetch('../games.json')
       .then(r => r.json())
       .then(games => {
-        games.sort((a, b) => (tagOrder[a.tag] ?? 99) - (tagOrder[b.tag] ?? 99));
+        games.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
         grid.innerHTML = games.map(g => {
           const cls    = tagClass[g.tag] || 'Contribution';
