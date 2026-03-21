@@ -225,7 +225,7 @@
         grid.innerHTML = items.map(g => {
           const cls   = tagClass[g.tag] || 'UI';
           const thumb = g.thumb
-            ? `<img class="card-thumb" src="../${g.thumb}" alt="${g.title}">`
+            ? `<img class="card-thumb" src="../Images/UIThumbnails/${g.thumb}" alt="${g.title}">`
             : `<div class="card-thumb-placeholder">No Thumbnail</div>`;
           const href  = g.slug ? `item.html?item=${g.slug}` : '#';
 
