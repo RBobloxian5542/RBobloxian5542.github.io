@@ -3,12 +3,18 @@
     "title": "Placeholder UI",
     "tag": "UI",
     "thumb": null,
-    "slug": "placeholder-ui"
+    "slug": "placeholder-ui",
+    "description": "Description of this UI work.",
+    "screenshots": [],
+    "videos": []
   },
   {
     "title": "Placeholder Effect",
     "tag": "Effect",
     "thumb": null,
-    "slug": "placeholder-effect"
+    "slug": "placeholder-effect",
+    "description": "Description of this effect.",
+    "screenshots": [],
+    "videos": []
   }
 ]
