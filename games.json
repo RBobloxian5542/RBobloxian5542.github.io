@@ -9,7 +9,6 @@
     "link": "https://www.roblox.com/games/122632018355697",
     "slug": "escape-flood-for-brainrots",
     "description": "One of the scripters on this experience.\n\nSystems\n• Speed and Carry Upgrade Shop\n• Inventory System\n• Sell System\n• Brainrot Index\n• Tutorial\n• Brainrot rarity stealing (for Robux)",
-    "screenshots": [],
     "videos": [],
     "private": true
   },
@@ -23,11 +22,8 @@
     "link": "https://www.roblox.com/games/133692635742123",
     "slug": "explode-a-brainrot",
     "description": "Lead developer on Explode A Brainrot — scripted every system from scratch.\n\nBombs\n• Bomb throwing system with trajectory\n• Bomb shop\n\nBrainrot\n• Brainrot spawning and client-side replication with mutations and traits\n• Brainrot placer\n\nSystems\n• Custom inventory system\n• Event system (Traits)\n• Clean Tutorial System\n• Offline rewards\n• Plot upgrades\n• Codes\n• Timed Quests\n\nUX\n• UI animations\n\nOther\n• Leaderboards\n• Admin panel\n\n(Built on a custom module loader)",
-    "screenshots": [
-      "Images/Showcases/ExplodeABrainrot/Robloxx.png"
-    ],
     "videos": [
-      "https://youtu.be/1dwfqc_ZN6c"
+      { "order": 1, "url": "https://youtu.be/1dwfqc_ZN6c" }
     ],
     "private": false
   },
@@ -41,7 +37,6 @@
     "link": "https://www.roblox.com/games/88174070090932",
     "slug": "grow-a-bomb",
     "description": "One of the scripters on this experience.\n\nPlot Placement System\n• Grid snapping and rotation support\n\nShops\n• Bombs, Bases and Exclusive shop\n• Global restock cycles and player-specific restock via Developer Products\n\nGlobal Leaderboards\n• Kills, Deaths, Robux Spent\n\nBase Systems\n• Base Around Plot mechanic with equippable bases\n• Percentage cash per second boost tied to equipped base\n\nEconomy\n• Cash Per Second (CPS) scaling with bombs placed\n• Offline cash system for returning players\n• Friend boost\n\nAdmin Tools\n• CMD system for testing and live moderation",
-    "screenshots": [],
     "videos": [],
     "private": false
   },
@@ -55,7 +50,6 @@
     "link": "https://www.roblox.com/games/94274441804212",
     "slug": "steal-and-feed-a-animal",
     "description": "Solo developer on Steal & Feed A Animal — created and scripted the entire game, except for the dynamic weather system.",
-    "screenshots": [],
     "videos": [],
     "private": false
   }
