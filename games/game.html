@@ -564,7 +564,7 @@
             while (i <= 20) {
               let found = false;
               for (const ext of extensions) {
-                const src = `../Images/Showcases/${folderName}/${i}.${ext}`;
+                const src = `../Images/GameShowcases/${folderName}/${i}.${ext}`;
                 const ok = await new Promise(res => {
                   const img = new Image();
                   img.onload  = () => res(true);
