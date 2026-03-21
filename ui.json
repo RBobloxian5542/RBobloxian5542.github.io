@@ -1,14 +1,17 @@
 [
   {
+    "order": 1,
     "title": "Placeholder UI",
     "tag": "UI",
     "thumb": null,
     "slug": "placeholder-ui",
     "description": "Description of this UI work.",
     "screenshots": [],
-    "videos": []
+    "videos": [],
+    "repo": "https://github.com/RBobloxian5542"
   },
   {
+    "order": 2,
     "title": "Placeholder Effect",
     "tag": "Effect",
     "thumb": null,
