@@ -49,10 +49,12 @@ jobs:
               const thumb = (thumbsData.data || []).find(d => String(d.universeId) === String(g.universeId));
               const title = info?.name || g.title || 'Unknown';
               const slug  = g.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+              const isPrivate = !info;
               return {
                 ...g,
                 title,
                 slug,
+                private: isPrivate,
                 visits: info?.visits                     || g.visits || 0,
                 thumb:  thumb?.thumbnails?.[0]?.imageUrl || g.thumb  || null,
                 link:   info?.rootPlaceId ? 'https://www.roblox.com/games/' + info.rootPlaceId : g.link || '#'
