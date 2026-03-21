@@ -259,73 +259,31 @@
 
     fetch('../games.json')
       .then(r => r.json())
-      .then(async games => {
+      .then(games => {
         games.sort((a, b) => (tagOrder[a.tag] ?? 99) - (tagOrder[b.tag] ?? 99));
 
-        // Fetch live data from Roblox API
-        const ids = games.map(g => g.universeId).filter(Boolean);
+        grid.innerHTML = games.map(g => {
+          const cls    = tagClass[g.tag] || 'Contribution';
+          const visits = formatVisits(g.visits);
+          const thumb  = g.thumb
+            ? `<img class="game-thumb" src="${g.thumb}" alt="${g.title}">`
+            : `<div class="game-thumb-placeholder">No Thumbnail</div>`;
+          const href   = g.link || '#';
 
-        if (ids.length > 0) {
-          try {
-            // Fetch game info (title, visits)
-            const gamesUrl   = `https://games.roblox.com/v1/games?universeIds=${ids.join(',')}`;
-            const thumbsUrl  = `https://thumbnails.roblox.com/v1/games/multiget/thumbnails?universeIds=${ids.join(',')}&size=768x432&format=Jpeg&isCircular=false`;
-            const proxy      = url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
-
-            const [gamesRes, thumbsRes] = await Promise.all([
-              fetch(proxy(gamesUrl)).then(r => r.json()),
-              fetch(proxy(thumbsUrl)).then(r => r.json())
-            ]);
-
-            const gamesData  = JSON.parse(gamesRes.contents).data  || [];
-            const thumbsData = JSON.parse(thumbsRes.contents).data || [];
-
-            // Map data back to games array
-            games = games.map(g => {
-              const info  = gamesData.find(d => String(d.id) === String(g.universeId));
-              const thumb = thumbsData.find(d => String(d.universeId) === String(g.universeId));
-
-              return {
-                ...g,
-                title:  info?.name                          || g.title  || 'Unknown',
-                visits: info?.visits                        || g.visits || 0,
-                thumb:  thumb?.thumbnails?.[0]?.imageUrl    || g.thumb  || null,
-                link:   info?.rootPlaceId
-                  ? `https://www.roblox.com/games/${info.rootPlaceId}`
-                  : g.link || '#'
-              };
-            });
-          } catch(e) {
-            // silently fall back to stored data
-          }
-        }
-
-        renderCards(games);
+          return `
+            <a href="${href}" target="_blank" class="game-card" data-tag="${g.tag}">
+              ${thumb}
+              <div class="game-info">
+                <span class="game-tag ${cls}">${g.tag}</span>
+                <div class="game-title">${g.title}</div>
+                <div class="game-visits">Visits: <b>${visits}</b></div>
+              </div>
+            </a>`;
+        }).join('');
       })
       .catch(() => {
         grid.innerHTML = '<div style="color:var(--text-dim);font-size:0.75rem;">Could not load games.json</div>';
       });
-
-    function renderCards(games) {
-      grid.innerHTML = games.map(g => {
-        const cls    = tagClass[g.tag] || 'Contribution';
-        const visits = formatVisits(g.visits);
-        const thumb  = g.thumb
-          ? `<img class="game-thumb" src="${g.thumb.startsWith('http') ? g.thumb : '../' + g.thumb}" alt="${g.title}">`
-          : `<div class="game-thumb-placeholder">No Thumbnail</div>`;
-        const href   = g.link || '#';
-
-        return `
-          <a href="${href}" target="_blank" class="game-card" data-tag="${g.tag}">
-            ${thumb}
-            <div class="game-info">
-              <span class="game-tag ${cls}">${g.tag}</span>
-              <div class="game-title">${g.title}</div>
-              <div class="game-visits">Visits: <b>${visits}</b></div>
-            </div>
-          </a>`;
-      }).join('');
-    }
   </script>
 
 </body>
