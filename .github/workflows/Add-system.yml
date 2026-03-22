@@ -1,0 +1,75 @@
+name: Add System
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'System Title'
+        required: true
+      broadDescription:
+        description: 'Short one-liner (shown on card)'
+        required: false
+        default: ''
+      description:
+        description: 'Full Description'
+        required: false
+        default: ''
+      imageFolder:
+        description: 'Image Folder Name (for screenshots)'
+        required: false
+        default: ''
+      thumb:
+        description: 'Thumbnail filename (e.g. tutorial.png)'
+        required: false
+        default: ''
+      repo:
+        description: 'GitHub Repo URL (optional)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  add-system:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add system to systems.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const items = JSON.parse(fs.readFileSync('systems.json', 'utf8'));
+
+          const maxOrder = items.reduce((max, i) => Math.max(max, i.order ?? 0), 0);
+          const title = '${{ github.event.inputs.title }}';
+          const slug  = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+          const newItem = {
+            order: maxOrder + 1,
+            title,
+            slug,
+            broadDescription: '${{ github.event.inputs.broadDescription }}',
+            thumb: '${{ github.event.inputs.thumb }}' || null,
+            imageFolder: '${{ github.event.inputs.imageFolder }}',
+            description: '${{ github.event.inputs.description }}',
+            videos: [],
+            repo: '${{ github.event.inputs.repo }}' || null
+          };
+
+          items.push(newItem);
+          fs.writeFileSync('systems.json', JSON.stringify(items, null, 2));
+          console.log('System added!');
+          "
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add systems.json
+          git commit -m "Add system: ${{ github.event.inputs.title }}"
+          git push
