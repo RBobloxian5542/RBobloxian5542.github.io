@@ -1,0 +1,79 @@
+name: Add UI & Effect
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Title'
+        required: true
+      tag:
+        description: 'Tag'
+        required: true
+        default: 'UI'
+        type: choice
+        options:
+          - UI
+          - Effect
+      description:
+        description: 'Full Description'
+        required: false
+        default: ''
+      imageFolder:
+        description: 'Image Folder Name (for screenshots)'
+        required: false
+        default: ''
+      thumb:
+        description: 'Thumbnail filename (e.g. myui.png)'
+        required: false
+        default: ''
+      repo:
+        description: 'GitHub Repo URL (optional)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  add-ui:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Add item to ui.json
+        run: |
+          node -e "
+          const fs = require('fs');
+          const items = JSON.parse(fs.readFileSync('ui.json', 'utf8'));
+
+          const maxOrder = items.reduce((max, i) => Math.max(max, i.order ?? 0), 0);
+          const title = '${{ github.event.inputs.title }}';
+          const slug  = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+          const newItem = {
+            order: maxOrder + 1,
+            title,
+            slug,
+            tag: '${{ github.event.inputs.tag }}',
+            thumb: '${{ github.event.inputs.thumb }}' || null,
+            imageFolder: '${{ github.event.inputs.imageFolder }}',
+            description: '${{ github.event.inputs.description }}',
+            videos: [],
+            repo: '${{ github.event.inputs.repo }}' || null
+          };
+
+          items.push(newItem);
+          fs.writeFileSync('ui.json', JSON.stringify(items, null, 2));
+          console.log('UI item added!');
+          "
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add ui.json
+          git commit -m "Add UI item: ${{ github.event.inputs.title }}"
+          git push
