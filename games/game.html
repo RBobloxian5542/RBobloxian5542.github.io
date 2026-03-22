@@ -217,27 +217,25 @@
     }
 
     /* description */
-    .description-text {
-      font-size: 0.82rem;
-      line-height: 1.9;
-      color: var(--text-dim);
+    .description-outer {
       max-width: 680px;
       background: var(--bg2);
       padding: 1.5rem;
       border-radius: 2px;
       border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .description-text {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--text-dim);
       overflow: hidden;
-      max-height: 7rem;
+      max-height: calc(0.82rem * 1.9 * 4);
       transition: max-height 0.4s ease;
-      position: relative;
-      -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-      mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
     }
 
     .description-text.expanded {
       max-height: 2000px;
-      -webkit-mask-image: none;
-      mask-image: none;
     }
 
     .show-more-btn {
@@ -494,7 +492,9 @@
     <!-- Description -->
     <div>
       <div class="section-label">Work Done</div>
-      <p class="description-text" id="game-description">No description yet.</p>
+      <div class="description-outer">
+        <p class="description-text" id="game-description">No description yet.</p>
+      </div>
       <button class="show-more-btn" id="show-more-btn" onclick="toggleDesc()">Show More ↓</button>
     </div>
 
