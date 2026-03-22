@@ -236,6 +236,11 @@
 
     .description-text.expanded {
       max-height: 2000px;
+      transition: max-height 0.4s ease;
+    }
+
+    .description-text.collapsing {
+      transition: max-height 0.2s ease !important;
     }
 
     .show-more-btn {
@@ -669,8 +674,24 @@
     function toggleDesc() {
       const desc = document.getElementById('game-description');
       const btn  = document.getElementById('show-more-btn');
-      const expanded = desc.classList.toggle('expanded');
-      btn.textContent = expanded ? 'Show Less ↑' : 'Show More ↓';
+
+      if (desc.classList.contains('expanded')) {
+        // Set explicit height first so transition starts from real height
+        desc.style.maxHeight = desc.scrollHeight + 'px';
+        desc.classList.add('collapsing');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            desc.style.maxHeight = '';
+            desc.classList.remove('expanded');
+            setTimeout(() => desc.classList.remove('collapsing'), 250);
+          });
+        });
+        btn.textContent = 'Show More ↓';
+      } else {
+        desc.style.maxHeight = '';
+        desc.classList.add('expanded');
+        btn.textContent = 'Show Less ↑';
+      }
     }
 
     // ── VIDEO MODAL ──
