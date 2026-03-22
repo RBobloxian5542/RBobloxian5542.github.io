@@ -226,7 +226,31 @@
       padding: 1.5rem;
       border-radius: 2px;
       border: 1px solid rgba(255,255,255,0.05);
+      overflow: hidden;
+      max-height: 7.6rem;
+      transition: max-height 0.4s ease;
     }
+
+    .description-text.expanded {
+      max-height: 2000px;
+    }
+
+    .show-more-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+      display: block;
+      margin-top: 0.5rem;
+    }
+
+    .show-more-btn:hover { color: var(--text); }
 
     /* screenshots grid */
     .screenshots-grid {
@@ -466,6 +490,7 @@
     <div>
       <div class="section-label">Work Done</div>
       <p class="description-text" id="game-description">No description yet.</p>
+      <button class="show-more-btn" id="show-more-btn" onclick="toggleDesc()">Show More ↓</button>
     </div>
 
     <!-- Screenshots -->
@@ -551,6 +576,14 @@
             const desc = document.getElementById('game-description');
             desc.style.whiteSpace = 'pre-line';
             desc.textContent = game.description;
+            // Hide button if content fits without scrolling
+            requestAnimationFrame(() => {
+              if (desc.scrollHeight <= desc.clientHeight + 5) {
+                document.getElementById('show-more-btn').style.display = 'none';
+              }
+            });
+          } else {
+            document.getElementById('show-more-btn').style.display = 'none';
           }
 
           // Screenshots — auto load 1.png, 2.png... from Images/Showcases/ImageFolder/
@@ -625,6 +658,14 @@
         .catch(() => {
           document.getElementById('game-title').textContent = 'Could not load game data';
         });
+    }
+
+    // ── DESCRIPTION TOGGLE ──
+    function toggleDesc() {
+      const desc = document.getElementById('game-description');
+      const btn  = document.getElementById('show-more-btn');
+      const expanded = desc.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Show Less ↑' : 'Show More ↓';
     }
 
     // ── VIDEO MODAL ──
