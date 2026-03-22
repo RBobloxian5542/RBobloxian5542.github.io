@@ -1,26 +1,5 @@
-[
-  {
+{
     "order": 1,
-    "title": "Tutorial System",
-    "broadDescription": "Guided new player onboarding",
-    "slug": "tutorial-system",
-    "thumb": null,
-    "imageFolder": "TutorialSystem",
-    "description": "Description of the tutorial system.",
-    "videos": []
-  },
-  {
-    "order": 2,
-    "title": "Sea System",
-    "broadDescription": "Trochoidal wave simulation",
-    "slug": "sea-system",
-    "thumb": null,
-    "imageFolder": "SeaSystem",
-    "description": "Description of the sea system.",
-    "videos": []
-  },
-  {
-    "order": 3,
     "title": "Tutorial System",
     "slug": "tutorial-system",
     "broadDescription": "Guided new player onboarding",
