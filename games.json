@@ -18,14 +18,17 @@
     "universeId": "9080410211",
     "tag": "Lead Developer",
     "title": "Explode A Brainrot",
-    "visits": 3825,
+    "visits": 3842,
     "thumb": "https://tr.rbxcdn.com/180DAY-5dec61cae149d83bf6841095deb05733/768/432/Image/Jpeg/noFilter",
     "link": "https://www.roblox.com/games/133692635742123",
     "slug": "explode-a-brainrot",
     "imageFolder": "ExplodeABrainrot",
     "description": "Lead developer on Explode A Brainrot — scripted every system from scratch.\n\nBombs\n• Bomb throwing system with trajectory\n• Bomb shop\n\nBrainrot\n• Brainrot spawning and client-side replication with mutations and traits\n• Brainrot placer\n\nSystems\n• Custom inventory system\n• Event system (Traits)\n• Clean Tutorial System\n• Offline rewards\n• Plot upgrades\n• Codes\n• Timed Quests\n\nUX\n• UI animations\n\nOther\n• Leaderboards\n• Admin panel\n\n(Built on a custom module loader)",
     "videos": [
-      { "order": 1, "url": "https://youtu.be/1dwfqc_ZN6c" }
+      {
+        "order": 1,
+        "url": "https://youtu.be/1dwfqc_ZN6c"
+      }
     ],
     "private": false
   },
@@ -33,15 +36,18 @@
     "order": 3,
     "universeId": "8773070016",
     "tag": "Part Time",
-    "title": "Grow a Bomb 🎃",
-    "visits": 125234,
+    "title": "Grow a Bomb 🎃 ",
+    "visits": 125244,
     "thumb": "https://tr.rbxcdn.com/180DAY-6a80a064e75936381ceab6cc8e270e17/768/432/Image/Jpeg/noFilter",
     "link": "https://www.roblox.com/games/88174070090932",
     "slug": "grow-a-bomb",
     "imageFolder": "GrowABomb",
     "description": "One of the scripters on this experience.\n\nPlot Placement System\n• Grid snapping and rotation support\n\nShops\n• Bombs, Bases and Exclusive shop\n• Global restock cycles and player-specific restock via Developer Products\n\nGlobal Leaderboards\n• Kills, Deaths, Robux Spent\n\nBase Systems\n• Base Around Plot mechanic with equippable bases\n• Percentage cash per second boost tied to equipped base\n\nEconomy\n• Cash Per Second (CPS) scaling with bombs placed\n• Offline cash system for returning players\n• Friend boost\n\nAdmin Tools\n• CMD system for testing and live moderation",
     "videos": [
-      { "order": 1, "url": "https://youtu.be/oHGvTPEoDSs" }
+      {
+        "order": 1,
+        "url": "https://youtu.be/oHGvTPEoDSs"
+      }
     ],
     "private": false
   },
@@ -50,14 +56,17 @@
     "universeId": "8280612564",
     "tag": "Lead Developer",
     "title": "Steal & Feed A Animal [DEMO]",
-    "visits": 35,
+    "visits": 36,
     "thumb": "https://t0.rbxcdn.com/180DAY-ef02ae25c07786396d3ea30dd18e8ed1",
     "link": "https://www.roblox.com/games/94274441804212",
     "slug": "steal-and-feed-a-animal",
     "imageFolder": "StealAndFeedAAnimal",
     "description": "Solo developer on Steal & Feed A Animal — created and scripted the entire game, except for the dynamic weather system.",
     "videos": [
-      { "order": 1, "url": "https://youtu.be/qd9wVWKP7pQ" }
+      {
+        "order": 1,
+        "url": "https://youtu.be/qd9wVWKP7pQ"
+      }
     ],
     "private": false
   }
