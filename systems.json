@@ -18,5 +18,16 @@
     "imageFolder": "SeaSystem",
     "description": "Description of the sea system.",
     "videos": []
+  },
+  {
+    "order": 3,
+    "title": "Tutorial System",
+    "slug": "tutorial-system",
+    "broadDescription": "Guided new player onboarding",
+    "thumb": null,
+    "imageFolder": "",
+    "description": "Simple tutorial systems with beams and button highlights",
+    "videos": [],
+    "repo": "https://github.com/RBobloxian5542/Roblox-tutorial-system/"
   }
 ]
