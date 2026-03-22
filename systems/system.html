@@ -182,16 +182,47 @@
       background: rgba(255,255,255,0.06);
     }
 
-    .description-text {
-      font-size: 0.82rem;
-      line-height: 1.9;
-      color: var(--text-dim);
+    .description-outer {
       max-width: 680px;
       background: var(--bg2);
       padding: 1.5rem;
       border-radius: 2px;
       border: 1px solid rgba(255,255,255,0.05);
     }
+
+    .description-text {
+      font-size: 0.82rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      overflow: hidden;
+      max-height: calc(0.82rem * 1.9 * 4);
+      transition: max-height 0.4s ease;
+    }
+
+    .description-text.expanded {
+      max-height: 2000px;
+      transition: max-height 0.4s ease;
+    }
+
+    .description-text.collapsing {
+      transition: max-height 0.2s ease !important;
+    }
+
+    .show-more-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      padding: 0.5rem 0;
+      transition: color 0.2s;
+      display: block;
+      margin-top: 0.5rem;
+    }
+    .show-more-btn:hover { color: var(--text); }
 
     .screenshots-grid {
       display: grid;
@@ -333,7 +364,10 @@
 
     <div>
       <div class="section-label">Description</div>
-      <p class="description-text" id="item-description">No description yet.</p>
+      <div class="description-outer">
+        <p class="description-text" id="item-description">No description yet.</p>
+      </div>
+      <button class="show-more-btn" id="show-more-btn" onclick="toggleDesc()">Show More ↓</button>
     </div>
 
     <div id="screenshots-section">
@@ -383,6 +417,27 @@
       if (e.key === 'Escape') { closeLightbox(); closeVideoModal(); }
     });
 
+    function toggleDesc() {
+      const desc = document.getElementById('item-description');
+      const btn  = document.getElementById('show-more-btn');
+      if (desc.classList.contains('expanded')) {
+        desc.style.maxHeight = desc.scrollHeight + 'px';
+        desc.classList.add('collapsing');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            desc.style.maxHeight = '';
+            desc.classList.remove('expanded');
+            setTimeout(() => desc.classList.remove('collapsing'), 250);
+          });
+        });
+        btn.textContent = 'Show More ↓';
+      } else {
+        desc.style.maxHeight = '';
+        desc.classList.add('expanded');
+        btn.textContent = 'Show Less ↑';
+      }
+    }
+
     const params = new URLSearchParams(window.location.search);
     const slug   = params.get('system');
 
@@ -418,6 +473,13 @@
             const desc = document.getElementById('item-description');
             desc.style.whiteSpace = 'pre-line';
             desc.textContent = item.description;
+            requestAnimationFrame(() => {
+              if (desc.scrollHeight <= desc.clientHeight + 5) {
+                document.getElementById('show-more-btn').style.display = 'none';
+              }
+            });
+          } else {
+            document.getElementById('show-more-btn').style.display = 'none';
           }
 
           // Screenshots — auto load from Images/SystemShowcases/imageFolder/1.png
