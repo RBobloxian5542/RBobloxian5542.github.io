@@ -1,6 +1,17 @@
 [
   {
     "order": 1,
+    "title": "Gun Hit Effect",
+    "slug": "gun-hit-effect",
+    "tag": "Effect",
+    "thumb": "GunHitEffect.png",
+    "imageFolder": "",
+    "description": "Gun Hit Effect with alternating sides and headshot crit feedback.",
+    "videos": ["https://youtu.be/EL85bgWYcm8"],
+    "repo": null
+  },
+  {
+    "order": 2,
     "title": "Lucky Block Animations",
     "slug": "lucky-block-animations",
     "tag": "Effect",
