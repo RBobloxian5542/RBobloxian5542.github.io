@@ -24,7 +24,10 @@
     "slug": "escape-flood-for-brainrots",
     "imageFolder": "EscapeFlood",
     "description": "One of the scripters on this experience.\n\nSystems\n• Speed and Carry Upgrade Shop\n• Inventory System\n• Sell System\n• Brainrot Index\n• Tutorial\n• Brainrot rarity stealing (for Robux). \n And even more stuff.. but this game is prolly never coming out :(",
-    "videos": [],
+    "videos": {
+        "order": 1,
+        "url": "https://youtu.be/AQIBFtUeALc"
+      },
     "private": true
   },
   {
