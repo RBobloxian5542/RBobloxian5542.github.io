@@ -4,7 +4,7 @@
     "title": "Party System",
     "slug": "party-system",
     "broadDescription": "Creates party and teleports friends to the same server",
-    "thumb": null,
+    "thumb": "PartySystem.png",
     "imageFolder": "",
     "description": "Creates party and teleports friends to the same server",
     "videos": ["https://youtu.be/BcKYfExH1aI?si=JutjnBNspF7P9KFe"]
