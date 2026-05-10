@@ -1,8 +1,19 @@
 [
   {
     "order": 1,
+    "title": "Slime RNG Roll Effect",
+    "slug": "slime-rng-roll",
+    "tag": "UI",
+    "thumb": "SlimeRNGRoll.png",
+    "imageFolder": "",
+    "description": "Roll Animation inspired by Slime RNG",
+    "videos": ["https://youtu.be/CbfaAMk0siA"],
+    "repo": null
+  },
+  {
+    "order": 2,
     "title": "Gun Hit Effect",
-    "slug": "gun-hit-effect",
+    "slug": "gun-hit",
     "tag": "Effect",
     "thumb": "GunHitEffect.png",
     "imageFolder": "",
@@ -11,7 +22,7 @@
     "repo": null
   },
   {
-    "order": 2,
+    "order": 3,
     "title": "Lucky Block Animations",
     "slug": "lucky-block-animations",
     "tag": "Effect",
