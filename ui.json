@@ -1,6 +1,17 @@
 [
   {
     "order": 1,
+    "title": "Inventory Lucky Block Opening Animation",
+    "slug": "inventory-lucky-block-opening",
+    "tag": "Effect",
+    "thumb": "InventoryLuckyBlock.png",
+    "imageFolder": "",
+    "description": "Inventory-based lucky block opening with a throw, brainrot choice animation, and collection back to the player.",
+    "videos": ["https://youtu.be/gjjNTTCOJEA"],
+    "repo": null
+  },
+  {
+    "order": 2,
     "title": "Slime RNG Roll Effect",
     "slug": "slime-rng-roll",
     "tag": "UI",
@@ -11,7 +22,7 @@
     "repo": null
   },
   {
-    "order": 2,
+    "order": 3,
     "title": "Gun Hit Effect",
     "slug": "gun-hit",
     "tag": "Effect",
@@ -22,7 +33,7 @@
     "repo": null
   },
   {
-    "order": 3,
+    "order": 4,
     "title": "Lucky Block Animations",
     "slug": "lucky-block-animations",
     "tag": "Effect",
