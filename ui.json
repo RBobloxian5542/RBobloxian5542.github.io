@@ -1,6 +1,17 @@
 [
   {
     "order": 1,
+    "title": "UI Opening Animation",
+    "slug": "ui-opening-animation",
+    "tag": "Effect",
+    "thumb": "UIOpeningAnimation.png",
+    "imageFolder": "",
+    "description": "Another Lucky block opening animation, but this time with a UI opening effect.",
+    "videos": ["https://youtu.be/iJagXlh7AwI"],
+    "repo": null
+  },
+  {
+    "order": 2,
     "title": "Inventory Lucky Block Opening Animation",
     "slug": "inventory-lucky-block-opening",
     "tag": "Effect",
@@ -11,7 +22,7 @@
     "repo": null
   },
   {
-    "order": 2,
+    "order": 3,
     "title": "Slime RNG Roll Effect",
     "slug": "slime-rng-roll",
     "tag": "UI",
@@ -22,7 +33,7 @@
     "repo": null
   },
   {
-    "order": 3,
+    "order": 4,
     "title": "Gun Hit Effect",
     "slug": "gun-hit",
     "tag": "Effect",
@@ -33,7 +44,7 @@
     "repo": null
   },
   {
-    "order": 4,
+    "order": 5,
     "title": "Lucky Block Animations",
     "slug": "lucky-block-animations",
     "tag": "Effect",
