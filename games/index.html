@@ -15,8 +15,8 @@
       --text:        #f0ead8;
       --text-dim:    #777;
       --tag-lead:    #ff6eb4;
-      --tag-commission: #60a5fa;
-      --tag-part:    #a78bfa;
+      --tag-scripter: #60a5fa;
+      --tag-lead-scripter: #a78bfa;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -110,8 +110,8 @@
 
     .filter-btn.active                                  { color: var(--text);        border-color: rgba(255,255,255,0.45); background: rgba(255,255,255,0.04); }
     .filter-btn[data-filter="Lead Developer"].active    { color: var(--tag-lead);    border-color: var(--tag-lead); }
-    .filter-btn[data-filter="Commission"].active      { color: var(--tag-commission); border-color: var(--tag-commission); }
-    .filter-btn[data-filter="Part Time"].active         { color: var(--tag-part);    border-color: var(--tag-part); }
+    .filter-btn[data-filter="Scripter"].active      { color: var(--tag-scripter); border-color: var(--tag-scripter); }
+    .filter-btn[data-filter="Lead Scripter"].active         { color: var(--tag-lead-scripter);    border-color: var(--tag-lead-scripter); }
 
     /* ── GRID ── */
     .games-grid {
@@ -183,8 +183,8 @@
     }
 
     .game-tag.Lead         { color: var(--tag-lead);    border-color: var(--tag-lead);    background: rgba(255,110,180,0.07); }
-    .game-tag.Commission { color: var(--tag-commission); border-color: var(--tag-commission); background: rgba(96,165,250,0.07); }
-    .game-tag.Part-Time    { color: var(--tag-part);    border-color: var(--tag-part);    background: rgba(167,139,250,0.07); }
+    .game-tag.Scripter { color: var(--tag-scripter); border-color: var(--tag-scripter); background: rgba(96,165,250,0.07); }
+    .game-tag.Lead-Scripter    { color: var(--tag-lead-scripter);    border-color: var(--tag-lead-scripter);    background: rgba(167,139,250,0.07); }
 
     .game-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -218,14 +218,14 @@
 
   <div class="page-header">
     <h1>Games</h1>
-    <p>All games I've worked on — led, contributed to, or scripted part time.</p>
+    <p>All games I've worked on - led, scripted, or contributed to.</p>
   </div>
 
   <div class="filters">
     <button class="filter-btn active" data-filter="all">All</button>
     <button class="filter-btn" data-filter="Lead Developer">Lead Developer</button>
-    <button class="filter-btn" data-filter="Part Time">Part Time</button>
-    <button class="filter-btn" data-filter="Commission">Commission</button>
+    <button class="filter-btn" data-filter="Lead Scripter">Lead Scripter</button>
+    <button class="filter-btn" data-filter="Scripter">Scripter</button>
   </div>
 
   <div class="games-grid" id="games-grid">
@@ -233,8 +233,8 @@
   </div>
 
   <script>
-    const tagOrder = { 'Lead Developer': 0, 'Part Time': 1, 'Commission': 2 };
-    const tagClass = { 'Lead Developer': 'Lead', 'Part Time': 'Part-Time', 'Commission': 'Commission' };
+    const tagOrder = { 'Lead Developer': 0, 'Lead Scripter': 1, 'Scripter': 2 };
+    const tagClass = { 'Lead Developer': 'Lead', 'Lead Scripter': 'Lead-Scripter', 'Scripter': 'Scripter' };
 
     function formatVisits(n) {
       n = parseInt(n);
@@ -268,7 +268,7 @@
         games.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
 
         grid.innerHTML = games.map(g => {
-          const cls    = tagClass[g.tag] || 'Commission';
+          const cls    = tagClass[g.tag] || 'Scripter';
           const visits = formatVisits(g.visits);
           const thumb  = g.thumb
             ? `<img class="game-thumb" src="${g.thumb}" alt="${g.title}">`

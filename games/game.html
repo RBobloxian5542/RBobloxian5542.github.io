@@ -15,8 +15,8 @@
       --text:        #f0ead8;
       --text-dim:    #777;
       --tag-lead:    #ff6eb4;
-      --tag-commission: #60a5fa;
-      --tag-part:    #a78bfa;
+      --tag-scripter: #60a5fa;
+      --tag-lead-scripter: #a78bfa;
       --roblox-blue: #0066ff;
     }
 
@@ -129,8 +129,8 @@
     }
 
     .game-tag.Lead         { color: var(--tag-lead);    border-color: var(--tag-lead);    background: rgba(255,110,180,0.07); }
-    .game-tag.Commission { color: var(--tag-commission); border-color: var(--tag-commission); background: rgba(96,165,250,0.07); }
-    .game-tag.Part-Time    { color: var(--tag-part);    border-color: var(--tag-part);    background: rgba(167,139,250,0.07); }
+    .game-tag.Scripter { color: var(--tag-scripter); border-color: var(--tag-scripter); background: rgba(96,165,250,0.07); }
+    .game-tag.Lead-Scripter    { color: var(--tag-lead-scripter);    border-color: var(--tag-lead-scripter);    background: rgba(167,139,250,0.07); }
 
     .game-title {
       font-family: 'Bebas Neue', sans-serif;
@@ -527,7 +527,7 @@
   </div>
 
   <script>
-    const tagClass = { 'Lead Developer': 'Lead', 'Part Time': 'Part-Time', 'Commission': 'Commission' };
+    const tagClass = { 'Lead Developer': 'Lead', 'Lead Scripter': 'Lead-Scripter', 'Scripter': 'Scripter' };
 
     function formatVisits(n) {
       n = parseInt(n);
@@ -563,7 +563,7 @@
 
           // Tag
           const tagEl  = document.getElementById('game-tag');
-          const tagCls = tagClass[game.tag] || 'Commission';
+          const tagCls = tagClass[game.tag] || 'Scripter';
           tagEl.textContent = game.tag;
           tagEl.classList.add(tagCls);
 
