@@ -1,6 +1,16 @@
 [
   {
     "order": 1,
+    "title": "Building System",
+    "slug": "building-system",
+    "broadDescription": "Satisfying building System with drag building, rotation etc.",
+    "thumb": "BuildingSystem.png",
+    "imageFolder": "",
+    "description": "Satisfying building System with drag building, rotation etc.",
+    "videos": []
+  },
+  {
+    "order": 2,
     "title": "Bridge System",
     "slug": "bridge-system",
     "broadDescription": "Bridge System inspired by Build a Bridge for Brainrots",
@@ -10,7 +20,7 @@
     "videos": ["https://youtu.be/BLSa04bcrdo"]
   },
   {
-    "order": 2,
+    "order": 3,
     "title": "FPS System",
     "slug": "fps-system",
     "broadDescription": "Fully scripted FPS system with script-based animations, respawning, and more",
@@ -20,7 +30,7 @@
     "videos": ["https://youtu.be/ad1h0QqGiBU"]
   },
   {
-    "order": 3,
+    "order": 4,
     "title": "Party System",
     "slug": "party-system",
     "broadDescription": "Creates party and teleports friends to the same server",
@@ -30,7 +40,7 @@
     "videos": ["https://youtu.be/BcKYfExH1aI?si=JutjnBNspF7P9KFe"]
   },
   {
-    "order": 4,
+    "order": 5,
     "title": "Tutorial System",
     "slug": "tutorial-system",
     "broadDescription": "Guided new player onboarding",
