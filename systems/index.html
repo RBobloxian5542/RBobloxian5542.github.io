@@ -189,7 +189,7 @@
     fetch('../systems.json')
       .then(r => r.json())
       .then(items => {
-        items.sort((a, b) => (a.order ?? 99) - (b.order ?? 99));
+        items.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
         const grid = document.getElementById('grid');
         grid.innerHTML = items.map(s => {
           const thumb = s.thumb
