@@ -47,7 +47,9 @@ jobs:
             const updated = games.map(g => {
               const info  = (gamesData.data  || []).find(d => String(d.id)         === String(g.universeId));
               const thumb = (thumbsData.data || []).find(d => String(d.universeId) === String(g.universeId));
-              const title = info?.name || g.title || 'Unknown';
+              // Keep the portfolio title authored in games.json. Roblox data is
+              // only used as a fallback for newly added games with no title yet.
+              const title = g.title || info?.name || 'Unknown';
               const slug  = g.slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
               return {
                 ...g,
