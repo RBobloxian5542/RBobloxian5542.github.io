@@ -524,8 +524,7 @@ button { color: inherit; }
   transition: transform 0.16s ease;
 }
 .creation-card:hover { transform: none; }
-.creation-card img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-.featured-grid-view .creation-card img { aspect-ratio: 1 / 1; }
+.creation-card img { display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 .creation-card-info { padding: 10px 0 0; }
 .creation-card-title { overflow: hidden; margin: 0 0 5px; font-size: 16px; font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
 .creation-card-meta { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 13px; }

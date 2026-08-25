@@ -158,6 +158,25 @@
       }
     }
 
+    async function fetchGameIcons(games) {
+      const universeIds = games.map((game) => game.universeId).filter(Boolean);
+      if (!universeIds.length) return games;
+
+      try {
+        const endpoint = `https://thumbnails.roblox.com/v1/games/icons?universeIds=${encodeURIComponent(universeIds.join(','))}&size=420x420&format=Png&isCircular=false`;
+        const response = await fetch(endpoint);
+        if (!response.ok) return games;
+        const result = await response.json();
+        const icons = new Map((result.data || []).map((item) => [String(item.targetId), item.state === 'Completed' ? item.imageUrl : null]));
+        return games.map((game) => ({
+          ...game,
+          icon: icons.get(String(game.universeId)) || game.thumb
+        }));
+      } catch {
+        return games;
+      }
+    }
+
     function renderFeatured() {
       if (!featuredItems.length) {
         featuredGrid.innerHTML = '<p class="muted">Featured work could not be loaded.</p>';
@@ -168,7 +187,7 @@
         featuredGrid.classList.add('featured-grid-view');
         featuredGrid.innerHTML = featuredItems.map((game) => `
           <a class="creation-card" href="games/game.html?game=${encodeURIComponent(game.slug)}">
-            <img src="${game.thumb}" alt="${game.title}">
+            <img src="${game.icon || game.thumb}" alt="${game.title}">
             <div class="creation-card-info">
               <h3 class="creation-card-title">${game.title}</h3>
               <div class="creation-card-meta">
@@ -187,7 +206,7 @@
         <div class="experience-card">
           <div class="experience-media">
             <a class="experience-media-link" href="games/game.html?game=${encodeURIComponent(game.slug)}" aria-label="Open ${game.title}">
-              <img src="${game.thumb}" alt="${game.title}">
+              <img src="${game.icon || game.thumb}" alt="${game.title}">
             </a>
           </div>
           <div class="experience-details">
@@ -240,6 +259,10 @@
           game.ccu = await fetchCurrentActive(game);
           return game;
         }));
+      })
+      .then((games) => {
+        featuredItems = games;
+        return fetchGameIcons(featuredItems);
       })
       .then((games) => {
         featuredItems = games;
