@@ -59,5 +59,25 @@
     "imageFolder": "",
     "description": "Paste a TikTok, Instagram, or YouTube link to turn it into a video with sound inside Roblox — without paying the 2K video-upload fee.",
     "videos": ["https://youtu.be/_S9m1auaOp4"]
+  },
+  {
+    "order": 7,
+    "title": "Tycoon Building Animation",
+    "slug": "tycoon-building-animation",
+    "broadDescription": "Animated tycoon building system with staged construction progress.",
+    "thumb": "TycoonBuildingAnimation.png",
+    "imageFolder": "",
+    "description": "Animated tycoon building system with staged construction progress.",
+    "videos": ["https://youtu.be/JzYrO51Nfh4"]
+  },
+  {
+    "order": 8,
+    "title": "Dialogue System",
+    "slug": "dialogue-system",
+    "broadDescription": "Interactive Roblox dialogue system with character conversations.",
+    "thumb": "DialogueSystem.png",
+    "imageFolder": "",
+    "description": "Interactive Roblox dialogue system with character conversations.",
+    "videos": ["https://youtu.be/6nLmZmgHIic"]
   }
 ]
