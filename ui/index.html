@@ -221,6 +221,7 @@
     fetch('../ui.json')
       .then(r => r.json())
       .then(items => {
+        items = items.filter(item => !item.hide);
         items.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
         grid.innerHTML = items.map(g => {
           const cls   = tagClass[g.tag] || 'UI';

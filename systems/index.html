@@ -189,6 +189,7 @@
     fetch('../systems.json')
       .then(r => r.json())
       .then(items => {
+        items = items.filter(item => !item.hide);
         items.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
         const grid = document.getElementById('grid');
         grid.innerHTML = items.map(s => {

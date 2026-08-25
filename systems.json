@@ -42,6 +42,7 @@
   {
     "order": 5,
     "title": "Tutorial System",
+    "hide": true,
     "slug": "tutorial-system",
     "broadDescription": "Guided new player onboarding",
     "thumb": null,

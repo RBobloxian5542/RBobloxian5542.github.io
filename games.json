@@ -16,6 +16,7 @@
   {
     "order": 2,
     "universeId": "9667516234",
+    "hide": true,
     "tag": "Scripter",
     "title": "Escape Flood for Brainrots",
     "visits": 41,
@@ -73,6 +74,7 @@
   {
     "order": 5,
     "universeId": "8280612564",
+    "hide": true,
     "tag": "Lead Developer",
     "title": "Steal & Feed A Animal [DEMO]",
     "visits": 38,

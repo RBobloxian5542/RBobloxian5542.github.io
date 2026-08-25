@@ -265,6 +265,7 @@
     fetch('../games.json')
       .then(r => r.json())
       .then(games => {
+        games = games.filter(game => !game.hide);
         games.sort((a, b) => (b.order ?? 0) - (a.order ?? 0));
 
         grid.innerHTML = games.map(g => {
