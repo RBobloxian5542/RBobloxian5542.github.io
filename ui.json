@@ -13,6 +13,7 @@
   {
     "order": 2,
     "title": "Inventory Lucky Block Opening Animation",
+    "hide": true,
     "slug": "inventory-lucky-block-opening",
     "tag": "Effect",
     "thumb": "InventoryLuckyBlock.png",
@@ -46,6 +47,7 @@
   {
     "order": 5,
     "title": "Lucky Block Animations",
+    "hide": true,
     "slug": "lucky-block-animations",
     "tag": "Effect",
     "thumb": "LuckyBlock.png",
