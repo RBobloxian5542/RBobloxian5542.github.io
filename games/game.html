@@ -6,30 +6,38 @@
   <title>Game — RBobloxian5542</title>
   <link rel="stylesheet" href="../site.css">
 </head>
-<body data-root=".." data-active="home" data-data-file="../games.json" data-image-root="../Images/Showcases/" data-thumb-root="../Images/" data-query-key="game">
+<body data-root=".." data-active="detail" data-data-file="../games.json" data-image-root="../Images/Showcases/" data-thumb-root="../Images/" data-query-key="game">
   <div id="page-content">
     <div class="detail-page">
-      <div class="detail-hero">
-        <div class="detail-video" id="detail-video" hidden></div>
-        <div class="detail-fallback" id="detail-fallback" hidden></div>
-        <div class="detail-info">
+      <div class="detail-layout">
+        <section class="media-carousel" id="media-carousel" hidden aria-label="Game media">
+          <div class="carousel-frame">
+            <div class="carousel-media" id="carousel-media"></div>
+            <button class="carousel-button prev" id="carousel-prev" type="button" aria-label="Previous media">‹</button>
+            <button class="carousel-button next" id="carousel-next" type="button" aria-label="Next media">›</button>
+          </div>
+        </section>
+
+        <aside class="detail-info">
           <h1 id="detail-title">Loading...</h1>
           <div class="detail-role" id="detail-role"></div>
-          <div class="detail-visits" id="detail-visits"></div>
-          <a class="detail-link" id="detail-link" href="#" target="_blank" rel="noreferrer" hidden>Play on Roblox</a>
-        </div>
+          <a class="detail-link" id="detail-link" href="#" target="_blank" rel="noreferrer" aria-label="Play on Roblox" hidden>
+            <span class="detail-link-icon" aria-hidden="true">▶</span>
+          </a>
+        </aside>
       </div>
 
-      <div class="detail-description" id="detail-description">Loading project data...</div>
+      <section class="detail-description" id="detail-description">
+        <h2>Description</h2>
+        <div id="detail-description-text">Loading project data...</div>
+      </section>
 
-      <section class="media-carousel" id="media-carousel" hidden>
-        <h2>Images</h2>
-        <div class="carousel-frame">
-          <img id="carousel-image" src="" alt="Project screenshot">
-          <button class="carousel-button prev" id="carousel-prev" type="button" aria-label="Previous image">‹</button>
-          <button class="carousel-button next" id="carousel-next" type="button" aria-label="Next image">›</button>
-        </div>
-        <div class="carousel-counter" id="carousel-counter"></div>
+      <section class="detail-stats" id="detail-stats" hidden aria-label="Game statistics">
+        <div class="detail-stat"><span>Active</span><strong id="detail-active">—</strong></div>
+        <div class="detail-stat"><span>Visits</span><strong id="detail-visits">—</strong></div>
+        <div class="detail-stat"><span>Favorites</span><strong id="detail-favorites">—</strong></div>
+        <div class="detail-stat"><span>Max Players</span><strong id="detail-max-players">—</strong></div>
+        <div class="detail-stat"><span>Genre</span><strong id="detail-genre">—</strong></div>
       </section>
     </div>
   </div>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — RBobloxian5542</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body data-root="." data-active="home">
+  <div id="page-content">
+    <div class="home-page">
+      <h1 class="home-title">Home</h1>
+
+      <section class="home-section" data-content-section="games" aria-labelledby="games-title">
+        <div class="home-section-heading">
+          <h2 id="games-title">Games</h2>
+        </div>
+        <div class="home-grid home-games-grid" id="home-games-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="home-section" data-content-section="systems" aria-labelledby="systems-title">
+        <div class="home-section-heading">
+          <h2 id="systems-title">Systems</h2>
+        </div>
+        <div class="home-grid" id="home-systems-grid" aria-live="polite"></div>
+      </section>
+
+      <section class="home-section" data-content-section="effects" aria-labelledby="effects-title">
+        <div class="home-section-heading">
+          <h2 id="effects-title">Effects</h2>
+        </div>
+        <div class="home-grid" id="home-effects-grid" aria-live="polite"></div>
+      </section>
+    </div>
+  </div>
+
+  <script src="site.js"></script>
+  <script>
+    const gamesGrid = document.getElementById('home-games-grid');
+    const systemsGrid = document.getElementById('home-systems-grid');
+    const effectsGrid = document.getElementById('home-effects-grid');
+    const requestedSection = new URLSearchParams(window.location.search).get('section');
+    const selectedSection = ['games', 'systems', 'effects'].includes(requestedSection)
+      ? requestedSection
+      : 'home';
+    const sectionTitle = selectedSection === 'home'
+      ? 'Home'
+      : selectedSection[0].toUpperCase() + selectedSection.slice(1);
+
+    document.title = `${sectionTitle} — RBobloxian5542`;
+    document.querySelector('.home-title').textContent = sectionTitle;
+    document.querySelectorAll('[data-content-section]').forEach((section) => {
+      section.hidden = selectedSection !== 'home' && section.dataset.contentSection !== selectedSection;
+    });
+
+    function formatCompactCount(value) {
+      if (value == null || value === '') return '—';
+      const number = Number(value);
+      if (!Number.isFinite(number)) return '—';
+      if (number >= 1000000000) return `${Math.floor(number / 1000000000)}B`;
+      if (number >= 1000000) return `${Math.floor(number / 1000000)}M`;
+      if (number >= 1000) return `${Math.floor(number / 1000)}K`;
+      return String(Math.floor(number));
+    }
+
+    function statIcon(type) {
+      if (type === 'players') {
+        return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"></circle><path d="M5.5 20c.3-3.8 2.4-6 6.5-6s6.2 2.2 6.5 6"></path></svg>';
+      }
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>';
+    }
+
+    function firstVideo(item) {
+      const video = Array.isArray(item.videos) ? item.videos[0] : null;
+      return typeof video === 'string' ? video : video?.url || '';
+    }
+
+    function mediaMarkup(item, thumbRoot) {
+      const thumb = item.thumb
+        ? (item.thumb.startsWith('http') ? item.thumb : `${thumbRoot}${item.thumb}`)
+        : '';
+      const previewUrl = firstVideo(item);
+      return `
+        <div class="home-card-media">
+          ${thumb ? `<img src="${thumb}" alt="${item.title}">` : '<div class="home-thumb-placeholder">No thumbnail</div>'}
+          ${previewUrl ? `<div class="home-card-video" data-preview-url="${encodeURIComponent(previewUrl)}" hidden></div>` : ''}
+        </div>
+      `;
+    }
+
+    function youtubeId(url) {
+      if (!url) return null;
+      try {
+        const parsed = new URL(url);
+        if (parsed.hostname.includes('youtube.com')) return parsed.searchParams.get('v');
+        if (parsed.hostname.includes('youtu.be')) return parsed.pathname.slice(1).split(/[?&]/)[0];
+      } catch {
+        return null;
+      }
+      return null;
+    }
+
+    function videoMarkup(url) {
+      if (/\.(mp4|webm)(\?.*)?$/i.test(url)) {
+        return `<video autoplay muted loop playsinline><source src="${url}" type="video/mp4"></video>`;
+      }
+      const id = youtubeId(url);
+      if (!id) return '';
+      const origin = window.location.origin && window.location.origin !== 'null'
+        ? `&origin=${encodeURIComponent(window.location.origin)}`
+        : '';
+      return `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&mute=1&controls=0&modestbranding=1&playsinline=1&rel=0&iv_load_policy=3&disablekb=1&fs=0${origin}" title="Preview video" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media"></iframe>`;
+    }
+
+    function renderGames(games) {
+      gamesGrid.innerHTML = games.map((game) => `
+        <a class="home-card home-game-card" href="games/game.html?game=${encodeURIComponent(game.slug)}">
+          ${mediaMarkup(game, '')}
+          <div class="home-card-body">
+            <h3>${game.title}</h3>
+            <div class="home-card-stats">
+              <span>${statIcon('players')}<span>${formatCompactCount(game.ccu)} active players</span></span>
+              <span>${statIcon('visits')}<span>${formatCompactCount(game.visits)} visits</span></span>
+            </div>
+          </div>
+        </a>
+      `).join('');
+    }
+
+    function renderSimpleItems(items, grid, href, thumbRoot) {
+      const queryKey = href.startsWith('effects/') ? 'item' : 'system';
+      grid.innerHTML = items.map((item) => `
+        <a class="home-card home-simple-card" href="${href}?${queryKey}=${encodeURIComponent(item.slug)}">
+          ${mediaMarkup(item, thumbRoot)}
+          <div class="home-card-body"><h3>${item.title}</h3></div>
+        </a>
+      `).join('');
+    }
+
+    function stopPreview(card) {
+      const preview = card.querySelector('.home-card-video');
+      if (!preview) return;
+      window.clearTimeout(card.previewTimer);
+      preview.innerHTML = '';
+      preview.hidden = true;
+      preview.dataset.playing = 'false';
+      const thumbnail = card.querySelector('.home-card-media > img');
+      if (thumbnail) thumbnail.hidden = false;
+    }
+
+    function startPreview(card) {
+      const preview = card.querySelector('.home-card-video');
+      if (!preview || preview.dataset.playing === 'true') return;
+      const url = decodeURIComponent(preview.dataset.previewUrl || '');
+      const markup = videoMarkup(url);
+      if (!markup) return;
+      preview.innerHTML = markup;
+      preview.hidden = false;
+      preview.dataset.playing = 'true';
+      const thumbnail = card.querySelector('.home-card-media > img');
+      if (thumbnail) thumbnail.hidden = true;
+    }
+
+    function setupPreviewHover(grid) {
+      grid.querySelectorAll('.home-card').forEach((card) => {
+        card.addEventListener('pointerenter', () => {
+          window.clearTimeout(card.previewTimer);
+          card.previewTimer = window.setTimeout(() => startPreview(card), 1000);
+        });
+        card.addEventListener('pointerleave', () => stopPreview(card));
+        card.addEventListener('focusin', () => {
+          window.clearTimeout(card.previewTimer);
+          card.previewTimer = window.setTimeout(() => startPreview(card), 1000);
+        });
+        card.addEventListener('focusout', (event) => {
+          if (!card.contains(event.relatedTarget)) stopPreview(card);
+        });
+      });
+    }
+
+    async function fetchCurrentActive(game) {
+      if (!game.universeId) return null;
+      try {
+        const response = await fetch(`https://games.roblox.com/v1/games?universeIds=${encodeURIComponent(game.universeId)}`);
+        if (!response.ok) return null;
+        const result = await response.json();
+        return result?.data?.[0]?.playing ?? null;
+      } catch {
+        return null;
+      }
+    }
+
+    Promise.allSettled([
+      fetch('games.json').then((response) => response.json()),
+      fetch('systems.json').then((response) => response.json()),
+      fetch('effects.json').then((response) => response.json())
+    ]).then(async ([gamesResult, systemsResult, effectsResult]) => {
+      const games = gamesResult.status === 'fulfilled'
+        ? gamesResult.value.filter((game) => !game.hide).sort((a, b) => (a.order || 0) - (b.order || 0))
+        : [];
+      const systems = systemsResult.status === 'fulfilled'
+        ? systemsResult.value.filter((system) => !system.hide).sort((a, b) => (a.order || 0) - (b.order || 0))
+        : [];
+      const effects = effectsResult.status === 'fulfilled'
+        ? effectsResult.value.filter((effect) => !effect.hide).sort((a, b) => (a.order || 0) - (b.order || 0))
+        : [];
+
+      const gamesWithPlayers = await Promise.all(games.map(async (game) => ({
+        ...game,
+        ccu: await fetchCurrentActive(game)
+      })));
+
+      renderGames(gamesWithPlayers);
+      renderSimpleItems(systems, systemsGrid, 'systems/system.html', 'Images/SystemThumbnails/');
+      renderSimpleItems(effects, effectsGrid, 'effects/item.html', 'Images/UIThumbnails/');
+      setupPreviewHover(gamesGrid);
+      setupPreviewHover(systemsGrid);
+      setupPreviewHover(effectsGrid);
+    }).catch(() => {
+      gamesGrid.innerHTML = '<p class="empty-state">Home content could not be loaded.</p>';
+    });
+  </script>
+</body>
+</html>

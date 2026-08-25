@@ -1,6 +1,6 @@
 [
   {
-    "order": 1,
+    "order": 4,
     "title": "UI Opening Animation",
     "slug": "ui-opening-animation",
     "tag": "Effect",
@@ -11,7 +11,7 @@
     "repo": null
   },
   {
-    "order": 2,
+    "order": 5,
     "title": "Inventory Lucky Block Opening Animation",
     "hide": true,
     "slug": "inventory-lucky-block-opening",
@@ -23,7 +23,7 @@
     "repo": null
   },
   {
-    "order": 3,
+    "order": 1,
     "title": "Slime RNG Roll Effect",
     "slug": "slime-rng-roll",
     "tag": "UI",
@@ -34,7 +34,7 @@
     "repo": null
   },
   {
-    "order": 4,
+    "order": 2,
     "title": "Gun Hit Effect",
     "slug": "gun-hit",
     "tag": "Effect",
@@ -45,7 +45,7 @@
     "repo": null
   },
   {
-    "order": 5,
+    "order": 3,
     "title": "Lucky Block Animations",
     "hide": true,
     "slug": "lucky-block-animations",

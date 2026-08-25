@@ -1,6 +1,6 @@
 [
   {
-    "order": 1,
+    "order": 6,
     "title": "Building System",
     "slug": "building-system",
     "broadDescription": "Satisfying building System with drag building, rotation etc.",
@@ -10,7 +10,7 @@
     "videos": ["https://youtu.be/T_dHPkxY16o"]
   },
   {
-    "order": 2,
+    "order": 7,
     "title": "Bridge System",
     "slug": "bridge-system",
     "broadDescription": "Bridge System inspired by Build a Bridge for Brainrots",
@@ -20,7 +20,7 @@
     "videos": ["https://youtu.be/BLSa04bcrdo"]
   },
   {
-    "order": 3,
+    "order": 5,
     "title": "FPS System",
     "slug": "fps-system",
     "broadDescription": "Fully scripted FPS system with script-based animations, respawning, and more",
@@ -40,7 +40,7 @@
     "videos": ["https://youtu.be/BcKYfExH1aI?si=JutjnBNspF7P9KFe"]
   },
   {
-    "order": 5,
+    "order": 8,
     "title": "Tutorial System",
     "hide": true,
     "slug": "tutorial-system",
@@ -51,7 +51,7 @@
     "videos": []
   },
   {
-    "order": 6,
+    "order": 2,
     "title": "Doomscrolling System",
     "slug": "doomscrolling-system",
     "broadDescription": "Turn TikTok, Instagram, and YouTube links into playable Roblox videos with sound.",
@@ -61,7 +61,7 @@
     "videos": ["https://youtu.be/_S9m1auaOp4"]
   },
   {
-    "order": 7,
+    "order": 3,
     "title": "Tycoon Building Animation",
     "slug": "tycoon-building-animation",
     "broadDescription": "Animated tycoon building system with staged construction progress.",
@@ -71,7 +71,7 @@
     "videos": ["https://youtu.be/JzYrO51Nfh4"]
   },
   {
-    "order": 8,
+    "order": 1,
     "title": "Dialogue System",
     "slug": "dialogue-system",
     "broadDescription": "Interactive Roblox dialogue system with character conversations.",

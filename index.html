@@ -23,18 +23,37 @@
             <span data-profile-verified hidden><svg class="badge-icon verified-badge" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 14.1 4l2.6-.2 1.2 2.3 2.3 1.2-.2 2.6L21.5 12 20 14.1l.2 2.6-2.3 1.2-1.2 2.3-2.6-.2L12 21.5 9.9 20l-2.6.2-1.2-2.3-2.3-1.2.2-2.6L2.5 12 4 9.9l-.2-2.6 2.3-1.2 1.2-2.3 2.6.2L12 2.5Z"></path><path d="m8.3 12.2 2.3 2.3 5.1-5.1" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
           </div>
           <p class="profile-handle">@RBobloxian5542</p>
-          <div class="profile-status"><span class="status-dot" id="profile-status-dot"></span><span id="profile-status-text">Loading...</span></div>
         </div>
       </div>
 
-      <div class="profile-socials" aria-label="Social links">
-        <a class="social-button" href="https://www.roblox.com/users/7539349290/profile" target="_blank" rel="noreferrer">
-          <img src="Images/Roblox.png" alt=""> Roblox
+      <div class="profile-stats" aria-label="Roblox profile statistics">
+        <a class="profile-stat" href="https://www.roblox.com/users/7539349290/friends" target="_blank" rel="noreferrer">
+          <strong data-profile-count="friends">39</strong><span>Friends</span>
         </a>
-        <a class="social-button" href="https://x.com/RBobloxian5542" target="_blank" rel="noreferrer">
-          <img src="Images/X.png" alt=""> X
+        <a class="profile-stat" href="https://www.roblox.com/users/7539349290/friends#!/followers" target="_blank" rel="noreferrer">
+          <strong data-profile-count="followers">55</strong><span>Followers</span>
         </a>
-        <span class="social-button"><img src="Images/Discord.png" alt=""> Discord</span>
+        <a class="profile-stat" href="https://www.roblox.com/users/7539349290/friends#!/following" target="_blank" rel="noreferrer">
+          <strong data-profile-count="following">5</strong><span>Following</span>
+        </a>
+      </div>
+
+      <p class="profile-description" id="profile-description">I'm a Roblox scripter, focused on fast work and building trendy, polished games.</p>
+
+      <section class="profile-contacts" aria-labelledby="contacts-title">
+        <div class="profile-contacts-heading">
+          <h2 id="contacts-title">Contacts</h2>
+        </div>
+        <div class="profile-socials">
+        <a class="social-button" href="https://www.roblox.com/users/7539349290/profile" target="_blank" rel="noreferrer" aria-label="Roblox: RBobloxian5542">
+          <img src="Images/Roblox.png" alt=""> <span>RBobloxian5542</span>
+        </a>
+        <a class="social-button" href="https://x.com/RBobloxian5542" target="_blank" rel="noreferrer" aria-label="X: RBobloxian5542">
+          <img src="Images/X.png" alt=""> <span>RBobloxian5542</span>
+        </a>
+        <a class="social-button" href="https://discord.com/users/1334601100455841984" target="_blank" rel="noreferrer" aria-label="Discord: RBobloxian5542"><img src="Images/Discord.png" alt=""> <span>RBobloxian5542</span></a>
+        </div>
+      </section>
       </div>
 
       <div class="tabs" role="tablist" aria-label="Profile sections">
@@ -43,22 +62,41 @@
       </div>
 
       <section class="tab-panel" id="about-panel" role="tabpanel">
-        <h2 class="profile-section-title">About</h2>
-        <p class="profile-description" id="profile-description">I'm a Roblox scripter, focused on fast work and building trendy, polished games.</p>
         <h2 class="profile-section-title">Skills</h2>
         <div class="skills">
-          <span class="skill">Luau</span>
-          <span class="skill">Git</span>
-          <span class="skill learning">React</span>
+          <article class="skill-card">
+            <div class="skill-icon-frame"><img src="Images/SkillIcons/Luau.svg" alt="Luau icon"></div>
+            <h3>Luau</h3>
+            <div class="skill-price"><img src="Images/SkillIcons/Robux.svg" alt="">1 298</div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon-frame"><img src="Images/SkillIcons/Git.svg" alt="Git icon"></div>
+            <h3>Git</h3>
+            <div class="skill-price"><img src="Images/SkillIcons/Robux.svg" alt="">546</div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon-frame"><img src="Images/SkillIcons/React.svg" alt="React icon"></div>
+            <h3>React</h3>
+            <div class="skill-price"><img src="Images/SkillIcons/Robux.svg" alt="">240</div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon-frame"><img src="Images/SkillIcons/Figma.svg" alt="Figma icon"></div>
+            <h3>Figma</h3>
+            <div class="skill-price"><img src="Images/SkillIcons/Robux.svg" alt="">120</div>
+          </article>
         </div>
       </section>
 
       <section class="tab-panel" id="creations-panel" role="tabpanel" hidden>
         <div class="featured-heading">
-          <h2 class="profile-section-title">Experiences</h2>
-          <div class="view-toggle" aria-label="Creation view">
-            <button class="active" type="button" aria-label="List view">▭</button>
-            <button type="button" aria-label="Grid view">▦</button>
+          <h2 class="profile-section-title">Featured Work</h2>
+          <div class="featured-view-toggle" role="group" aria-label="Featured work view">
+            <button class="featured-view-button active" type="button" data-featured-view="list" aria-label="List view" aria-pressed="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="12" rx="1"></rect></svg>
+            </button>
+            <button class="featured-view-button" type="button" data-featured-view="grid" aria-label="Grid view" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="4" height="4" rx=".5"></rect><rect x="10" y="4" width="4" height="4" rx=".5"></rect><rect x="16" y="4" width="4" height="4" rx=".5"></rect><rect x="4" y="10" width="4" height="4" rx=".5"></rect><rect x="10" y="10" width="4" height="4" rx=".5"></rect><rect x="16" y="10" width="4" height="4" rx=".5"></rect><rect x="4" y="16" width="4" height="4" rx=".5"></rect><rect x="10" y="16" width="4" height="4" rx=".5"></rect><rect x="16" y="16" width="4" height="4" rx=".5"></rect></svg>
+            </button>
           </div>
         </div>
         <div class="featured-grid" id="featured-grid"></div>
@@ -88,44 +126,86 @@
       });
     });
 
-    fetch('config.json')
-      .then((response) => response.json())
-      .then((config) => {
-        const open = Boolean(config.openToWork);
-        document.getElementById('profile-status-dot').classList.toggle('open', open);
-        document.getElementById('profile-status-text').textContent = open ? 'Open to Work' : 'Not Available';
-      })
-      .catch(() => {
-        document.getElementById('profile-status-text').textContent = 'Status unavailable';
-      });
-
     const featuredGrid = document.getElementById('featured-grid');
+    const featuredViewButtons = document.querySelectorAll('[data-featured-view]');
     let featuredItems = [];
     let featuredIndex = 0;
+    let featuredView = 'list';
+
+    function formatCompactCount(value) {
+      const number = Number(value);
+      if (!Number.isFinite(number)) return '—';
+      if (number >= 1000000000) return `${Math.floor(number / 1000000000)}B`;
+      if (number >= 1000000) return `${Math.floor(number / 1000000)}M`;
+      if (number >= 1000) return `${Math.floor(number / 1000)}K`;
+      return String(Math.floor(number));
+    }
+
+    const featuredStatIcons = {
+      players: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5.5 20c.3-3.8 2.4-6 6.5-6s6.2 2.2 6.5 6"/></svg>',
+      visits: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.3-6 9.5-6 9.5 6 9.5 6-3.3 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.5"/></svg>'
+    };
+
+    async function fetchCurrentActive(game) {
+      if (!game.universeId) return null;
+      try {
+        const response = await fetch(`https://games.roblox.com/v1/games?universeIds=${encodeURIComponent(game.universeId)}`);
+        if (!response.ok) return null;
+        const result = await response.json();
+        return result?.data?.[0]?.playing ?? null;
+      } catch {
+        return null;
+      }
+    }
 
     function renderFeatured() {
-      const game = featuredItems[featuredIndex];
-      if (!game) {
+      if (!featuredItems.length) {
         featuredGrid.innerHTML = '<p class="muted">Featured work could not be loaded.</p>';
         return;
       }
+
+      if (featuredView === 'grid') {
+        featuredGrid.classList.add('featured-grid-view');
+        featuredGrid.innerHTML = featuredItems.map((game) => `
+          <a class="creation-card" href="games/game.html?game=${encodeURIComponent(game.slug)}">
+            <img src="${game.thumb}" alt="${game.title}">
+            <div class="creation-card-info">
+              <h3 class="creation-card-title">${game.title}</h3>
+              <div class="creation-card-meta">
+                <span class="creation-stat" title="Current players">${featuredStatIcons.players}<span>${formatCompactCount(game.ccu)}</span></span>
+                <span class="creation-stat" title="Visits">${featuredStatIcons.visits}<span>${formatCompactCount(game.visits)}</span></span>
+              </div>
+            </div>
+          </a>
+        `).join('');
+        return;
+      }
+
+      featuredGrid.classList.remove('featured-grid-view');
+      const game = featuredItems[featuredIndex];
       featuredGrid.innerHTML = `
         <div class="experience-card">
           <div class="experience-media">
-            <img src="${game.thumb}" alt="${game.title}">
-            <button class="experience-arrow prev" type="button" data-featured-nav="previous" aria-label="Previous creation">‹</button>
-            <button class="experience-arrow next" type="button" data-featured-nav="next" aria-label="Next creation">›</button>
+            <a class="experience-media-link" href="games/game.html?game=${encodeURIComponent(game.slug)}" aria-label="Open ${game.title}">
+              <img src="${game.thumb}" alt="${game.title}">
+            </a>
           </div>
-          <a class="experience-details" href="games/game.html?game=${encodeURIComponent(game.slug)}">
+          <div class="experience-details">
             <h3>${game.title}</h3>
             <p>${game.description || 'Roblox project.'}</p>
             <div class="experience-stats">
-              <span class="experience-stat">Role<strong>${game.tag || 'Roblox project'}</strong></span>
-              <span class="experience-stat">Visits<strong>${game.visits ?? '—'}</strong></span>
+              <span class="experience-stat">Active<strong>${formatCompactCount(game.ccu)}</strong></span>
+              <span class="experience-stat">Visits<strong>${formatCompactCount(game.visits)}</strong></span>
             </div>
-          </a>
+          </div>
+          <button class="experience-arrow prev" type="button" data-featured-nav="previous" aria-label="Previous creation">‹</button>
+          <button class="experience-arrow next" type="button" data-featured-nav="next" aria-label="Next creation">›</button>
+          <div class="experience-loading" aria-hidden="true"></div>
         </div>
       `;
+
+      const loading = featuredGrid.querySelector('.experience-loading');
+      window.setTimeout(() => loading?.remove(), 1000);
     }
 
     featuredGrid.addEventListener('click', (event) => {
@@ -138,10 +218,31 @@
       renderFeatured();
     });
 
+    featuredViewButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        featuredView = button.dataset.featuredView;
+        featuredViewButtons.forEach((viewButton) => {
+          const isSelected = viewButton === button;
+          viewButton.classList.toggle('active', isSelected);
+          viewButton.setAttribute('aria-pressed', String(isSelected));
+        });
+        renderFeatured();
+      });
+    });
+
     fetch('games.json')
       .then((response) => response.json())
       .then((games) => {
-        featuredItems = games.filter((game) => !game.hide);
+        featuredItems = games
+          .filter((game) => !game.hide)
+          .sort((a, b) => (a.order || 0) - (b.order || 0));
+        return Promise.all(featuredItems.map(async (game) => {
+          game.ccu = await fetchCurrentActive(game);
+          return game;
+        }));
+      })
+      .then((games) => {
+        featuredItems = games;
         renderFeatured();
       })
       .catch(() => renderFeatured());
@@ -149,6 +250,16 @@
     const avatarToggle = document.getElementById('avatar-toggle');
     const bannerAvatar = document.querySelector('[data-profile-avatar]');
     let avatarMode = '2d';
+
+    function syncAvatarToggle() {
+      const hasThreeD = Boolean(window.robloxProfileMedia?.avatar3d?.imageUrl);
+      avatarToggle.title = hasThreeD
+        ? `Switch to ${avatarMode === '2d' ? '3D' : '2D'} avatar view`
+        : '3D preview unavailable; using a visual fallback';
+    }
+
+    syncAvatarToggle();
+    window.addEventListener('roblox-profile-media-ready', syncAvatarToggle);
     avatarToggle.addEventListener('click', () => {
       avatarMode = avatarMode === '2d' ? '3d' : '2d';
       avatarToggle.textContent = avatarMode.toUpperCase();
@@ -163,6 +274,7 @@
         bannerAvatar.src = window.robloxProfileMedia?.avatar || 'Images/Avatar.png';
         bannerAvatar.classList.remove('avatar-rotation-fallback');
       }
+      syncAvatarToggle();
     });
   </script>
 </body>
