@@ -3,422 +3,109 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RBobloxian5542 — Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg:       #0a0a0a;
-      --text:     #f0ead8;
-      --text-dim: #888888;
-      --grid:     rgba(255, 255, 255, 0.04);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; min-height: 100%; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      overflow-x: hidden;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem 5vw 0;
-    }
-
-    /* top bar */
-    .hero-topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 3vh;
-    }
-
-    .hero-name {
-      font-size: 0.9rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text);
-    }
-
-    .hero-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-    }
-
-    /* content row */
-    .hero-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      flex: 1;
-      gap: 2vw;
-      padding-top: 1vh;
-    }
-
-    /* left */
-    .hero-left {
-      flex: 1;
-      max-width: 520px;
-    }
-
-    .hero-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(4rem, 8.5vw, 8.5rem);
-      line-height: 0.9;
-      color: var(--text);
-      margin-bottom: 1.5rem;
-      letter-spacing: 0.01em;
-      font-weight: 400;
-    }
-
-    .hero-desc {
-      font-size: 0.78rem;
-      line-height: 1.8;
-      color: var(--text-dim);
-      max-width: 400px;
-      margin-bottom: 1.5rem;
-    }
-
-    /* ── AVAILABILITY BADGE (now under desc) ── */
-    .badge-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-bottom: 2rem;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      padding: 0.9rem 1.2rem;
-      width: fit-content;
-    }
-
-    .badge-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .badge-dot.green { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
-    .badge-dot.red   { background: #f87171; box-shadow: 0 0 6px #f87171; }
-    .badge-dot.grey  { background: #666; }
-
-    .badge-label { color: var(--text); }
-
-    /* socials — horizontal row */
-    .hero-socials {
-      display: flex;
-      flex-direction: row;
-      gap: 1.8rem;
-      align-items: center;
-    }
-
-    .social-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.55rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.8rem;
-      letter-spacing: 0.04em;
-      transition: opacity 0.2s;
-    }
-
-    .social-link:hover { opacity: 0.55; }
-
-    .social-link.no-link {
-      cursor: default;
-      opacity: 0.5;
-    }
-
-    .social-icon {
-      width: 22px;
-      height: 22px;
-      object-fit: contain;
-    }
-
-    /* right — avatar with grid bg */
-    .hero-right {
-      flex: 0 0 auto;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      width: 380px;
-      min-height: 420px;
-      overflow: visible;
-    }
-
-    /* geometric grid background */
-    .hero-right::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
-      background-size: 36px 36px;
-      z-index: 0;
-    }
-
-    /* fade grid at edges */
-    .hero-right::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 35%, var(--bg) 75%);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .avatar {
-      height: clamp(380px, 58vh, 520px);
-      width: auto;
-      object-fit: contain;
-      display: block;
-      position: relative;
-      z-index: 2;
-      max-width: 100%;
-    }
-
-    /* divider between hero and buttons */
-    .hero-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.07);
-      margin: 0 5vw;
-    }
-
-    /* responsive */
-    @media (max-width: 900px) {
-      .hero-content { flex-wrap: wrap; }
-      .hero-right { width: 280px; min-height: 300px; }
-      .avatar { height: 280px; }
-    }
-
-    @media (max-width: 768px) {
-      .hero-content { flex-direction: column; align-items: center; gap: 2rem; }
-      .hero-right { width: 240px; min-height: 260px; }
-      .avatar { height: 240px; }
-      .hero-socials { flex-wrap: wrap; gap: 1.2rem; }
-      .categories { grid-template-columns: 1fr; }
-      .cat-btn { height: 140px; }
-    }
-
-    /* ── AVAILABILITY BADGE ── */
-    .badge-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-      align-self: center;
-      flex: 0 0 auto;
-      min-width: 220px;
-    }
-
-    .badge-row {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-    }
-
-    .badge-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .badge-dot.green { background: #4ade80; box-shadow: 0 0 6px #4ade80; }
-    .badge-dot.red   { background: #f87171; box-shadow: 0 0 6px #f87171; }
-    .badge-dot.grey  { background: #666; }
-
-    .badge-label { color: var(--text); }
-
-    /* ── CATEGORY BUTTONS ── */
-    .categories {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-      padding: 2rem 5vw 3rem;
-    }
-
-    .cat-btn {
-      position: relative;
-      height: 200px;
-      overflow: hidden;
-      text-decoration: none;
-      display: block;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .cat-btn img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(4px) brightness(0.35);
-      transform: scale(1.05);
-      transition: filter 0.3s, transform 0.3s;
-    }
-
-    .cat-btn:hover img {
-      filter: blur(2px) brightness(0.55);
-      transform: scale(1.08);
-    }
-
-    .cat-btn-label {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      letter-spacing: 0.05em;
-      color: var(--text);
-      z-index: 2;
-      transition: opacity 0.2s;
-    }
-
-    .cat-btn:hover .cat-btn-label { opacity: 0.8; }
-  </style>
+  <title>RBobloxian5542 — Profile</title>
+  <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body data-root="." data-active="profile">
+  <div id="page-content">
+    <div class="profile-page">
+      <div class="profile-banner">
+        <img src="Images/Avatar.png" alt="RBobloxian5542 avatar">
+        <span class="profile-banner-label">2D</span>
+      </div>
 
-  <header class="hero">
-
-    <div class="hero-topbar">
-      <span class="hero-name">RBobloxian5542</span>
-      <span class="hero-label">Portfolio</span>
-    </div>
-
-    <div class="hero-content">
-
-      <div class="hero-left">
-        <h1 class="hero-title">
-          Roblox<br>
-          Scripter
-        </h1>
-        <p class="hero-desc">
-          I'm a Roblox scripter,
-          focused on fast work and building trendy, polished games.
-        </p>
-
-        <!-- Availability Badge — under description -->
-        <div class="badge-wrap">
-          <div class="badge-row">
-            <span class="badge-dot" id="status-dot"></span>
-            <span class="badge-label" id="status-text">Loading...</span>
-          </div>
-          <div class="badge-row">
-            <span class="badge-dot grey"></span>
-            <span>Availability: Can work everyday, more time on weekends</span>
-          </div>
-          <div class="badge-row">
-            <span class="badge-dot grey"></span>
-            <span id="badge-timezone">—</span>
-          </div>
-        </div>
-
-        <div class="hero-socials">
-          <a href="https://www.roblox.com/users/7539349290/profile" target="_blank" class="social-link">
-            <img src="Images/Roblox.png" alt="Roblox" class="social-icon">
-            <span>RBobloxian5542</span>
-          </a>
-          <a href="https://x.com/RBobloxian5542" target="_blank" class="social-link">
-            <img src="Images/X.png" alt="X" class="social-icon">
-            <span>RBobloxian5542</span>
-          </a>
-          <div class="social-link no-link">
-            <img src="Images/Discord.png" alt="Discord" class="social-icon">
-            <span>RBobloxian5542</span>
-          </div>
+      <div class="profile-identity">
+        <img class="profile-avatar" src="Images/Avatar.png" alt="RBobloxian5542 avatar">
+        <div>
+          <h1 class="profile-name">RBobloxian5542 ◉</h1>
+          <p class="profile-handle">@RBobloxian5542</p>
+          <div class="profile-status"><span class="status-dot" id="profile-status-dot"></span><span id="profile-status-text">Loading...</span></div>
         </div>
       </div>
 
-      <div class="hero-right">
-        <img src="Images/Avatar.png" alt="Roblox Avatar" class="avatar">
+      <div class="profile-socials" aria-label="Social links">
+        <a class="social-button" href="https://www.roblox.com/users/7539349290/profile" target="_blank" rel="noreferrer">
+          <img src="Images/Roblox.png" alt=""> Roblox
+        </a>
+        <a class="social-button" href="https://x.com/RBobloxian5542" target="_blank" rel="noreferrer">
+          <img src="Images/X.png" alt=""> X
+        </a>
+        <span class="social-button"><img src="Images/Discord.png" alt=""> Discord</span>
       </div>
 
+      <div class="tabs" role="tablist" aria-label="Profile sections">
+        <button class="tab-button active" type="button" role="tab" aria-selected="true" data-tab="about">About</button>
+        <button class="tab-button" type="button" role="tab" aria-selected="false" data-tab="creations">Creations</button>
+      </div>
+
+      <section class="tab-panel" id="about-panel" role="tabpanel">
+        <h2 class="profile-section-title">About</h2>
+        <p class="profile-description" id="profile-description">I’m a Roblox scripter focused on fast work and building trendy, polished games.</p>
+        <h2 class="profile-section-title">Skills</h2>
+        <div class="skills">
+          <span class="skill">Luau</span>
+          <span class="skill">Git</span>
+          <span class="skill learning">React</span>
+        </div>
+      </section>
+
+      <section class="tab-panel" id="creations-panel" role="tabpanel" hidden>
+        <h2 class="profile-section-title">Featured Work</h2>
+        <div class="featured-grid" id="featured-grid"></div>
+      </section>
     </div>
+  </div>
 
-  </header>
-
-  <div class="hero-divider"></div>
-
-  <!-- Category Buttons -->
-  <section class="categories">
-    <a href="https://rbobloxian5542.github.io/games" class="cat-btn">
-      <img src="Images/ButtonGames.jpg" alt="Games">
-      <span class="cat-btn-label">Games</span>
-    </a>
-    <a href="https://rbobloxian5542.github.io/systems" class="cat-btn">
-      <img src="Images/ButtonSystems.jpg" alt="Systems">
-      <span class="cat-btn-label">Game Systems</span>
-    </a>
-    <a href="https://rbobloxian5542.github.io/ui" class="cat-btn">
-      <img src="Images/ButtonUI.jpg" alt="UI">
-      <span class="cat-btn-label">UI & Effects</span>
-    </a>
-  </section>
-
+  <script src="site.js"></script>
   <script>
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const panels = {
+      about: document.getElementById('about-panel'),
+      creations: document.getElementById('creations-panel')
+    };
+
+    tabButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const selected = button.dataset.tab;
+        tabButtons.forEach((tab) => {
+          const isSelected = tab === button;
+          tab.classList.toggle('active', isSelected);
+          tab.setAttribute('aria-selected', String(isSelected));
+        });
+        Object.entries(panels).forEach(([key, panel]) => {
+          panel.hidden = key !== selected;
+        });
+      });
+    });
+
     fetch('config.json')
-      .then(r => r.json())
-      .then(cfg => {
-        const dot  = document.getElementById('status-dot');
-        const text = document.getElementById('status-text');
-        if (cfg.openToWork) {
-          dot.classList.add('green');
-          text.textContent = 'Open to Work';
-        } else {
-          dot.classList.add('red');
-          text.textContent = 'Not Available';
-        }
-
-        const tz = cfg.timezone || 'UTC+1';
-        const ianaMap = {
-          'UTC+1': 'Europe/Prague', 'UTC+2': 'Europe/Helsinki',
-          'UTC+0': 'Europe/London', 'UTC-5': 'America/New_York',
-          'UTC-8': 'America/Los_Angeles'
-        };
-        const ianaZone = ianaMap[tz] || 'Europe/Prague';
-
-        function updateClock() {
-          const time = new Date().toLocaleTimeString('en-GB', {
-            hour: '2-digit', minute: '2-digit', second: '2-digit',
-            timeZone: ianaZone
-          });
-          document.getElementById('badge-timezone').textContent =
-            'Timezone: ' + tz + ' (' + time + ')';
-        }
-        updateClock();
-        setInterval(updateClock, 1000);
+      .then((response) => response.json())
+      .then((config) => {
+        const open = Boolean(config.openToWork);
+        document.getElementById('profile-status-dot').classList.toggle('open', open);
+        document.getElementById('profile-status-text').textContent = open ? 'Open to Work' : 'Not Available';
       })
       .catch(() => {
-        document.getElementById('status-text').textContent = 'Config not found';
+        document.getElementById('profile-status-text').textContent = 'Status unavailable';
+      });
+
+    fetch('games.json')
+      .then((response) => response.json())
+      .then((games) => {
+        const featured = games.filter((game) => !game.hide).slice(0, 3);
+        document.getElementById('featured-grid').innerHTML = featured.map((game) => `
+          <a class="creation-card" href="games/game.html?game=${encodeURIComponent(game.slug)}">
+            <img src="${game.thumb}" alt="${game.title}">
+            <div class="creation-card-info">
+              <p class="creation-card-title">${game.title}</p>
+              <span class="creation-card-meta">${game.tag || 'Roblox project'}</span>
+            </div>
+          </a>
+        `).join('');
+      })
+      .catch(() => {
+        document.getElementById('featured-grid').innerHTML = '<p class="muted">Featured work could not be loaded.</p>';
       });
   </script>
-
 </body>
 </html>
