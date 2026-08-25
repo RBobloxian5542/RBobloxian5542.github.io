@@ -10,14 +10,18 @@
   <div id="page-content">
     <div class="profile-page">
       <div class="profile-banner">
-        <img src="Images/Avatar.png" alt="RBobloxian5542 avatar">
-        <span class="profile-banner-label">2D</span>
+        <img data-profile-avatar src="Images/Avatar.png" alt="RBobloxian5542 avatar">
+        <button class="profile-banner-label" id="avatar-toggle" type="button" aria-pressed="false">2D</button>
       </div>
 
       <div class="profile-identity">
-        <img class="profile-avatar" src="Images/Avatar.png" alt="RBobloxian5542 avatar">
+        <img class="profile-avatar" data-profile-headshot src="Images/Avatar.png" alt="RBobloxian5542 avatar">
         <div>
-          <h1 class="profile-name">RBobloxian5542 ◉</h1>
+          <div class="profile-name-line">
+            <h1 class="profile-name" data-profile-name>RBobloxian5542</h1>
+            <span data-profile-plus hidden><svg class="badge-icon plus-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.5 19 6.2v8.6L12 18.5 5 14.8V6.2l7-3.7Z"></path><path d="M12 7v7M8.5 10.5h7"></path></svg></span>
+            <span data-profile-verified hidden><svg class="badge-icon verified-badge" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.5 14.1 4l2.6-.2 1.2 2.3 2.3 1.2-.2 2.6L21.5 12 20 14.1l.2 2.6-2.3 1.2-1.2 2.3-2.6-.2L12 21.5 9.9 20l-2.6.2-1.2-2.3-2.3-1.2.2-2.6L2.5 12 4 9.9l-.2-2.6 2.3-1.2 1.2-2.3 2.6.2L12 2.5Z"></path><path d="m8.3 12.2 2.3 2.3 5.1-5.1" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+          </div>
           <p class="profile-handle">@RBobloxian5542</p>
           <div class="profile-status"><span class="status-dot" id="profile-status-dot"></span><span id="profile-status-text">Loading...</span></div>
         </div>
@@ -40,7 +44,7 @@
 
       <section class="tab-panel" id="about-panel" role="tabpanel">
         <h2 class="profile-section-title">About</h2>
-        <p class="profile-description" id="profile-description">I’m a Roblox scripter focused on fast work and building trendy, polished games.</p>
+        <p class="profile-description" id="profile-description">I'm a Roblox scripter, focused on fast work and building trendy, polished games.</p>
         <h2 class="profile-section-title">Skills</h2>
         <div class="skills">
           <span class="skill">Luau</span>
@@ -50,7 +54,13 @@
       </section>
 
       <section class="tab-panel" id="creations-panel" role="tabpanel" hidden>
-        <h2 class="profile-section-title">Featured Work</h2>
+        <div class="featured-heading">
+          <h2 class="profile-section-title">Experiences</h2>
+          <div class="view-toggle" aria-label="Creation view">
+            <button class="active" type="button" aria-label="List view">▭</button>
+            <button type="button" aria-label="Grid view">▦</button>
+          </div>
+        </div>
         <div class="featured-grid" id="featured-grid"></div>
       </section>
     </div>
@@ -89,23 +99,71 @@
         document.getElementById('profile-status-text').textContent = 'Status unavailable';
       });
 
+    const featuredGrid = document.getElementById('featured-grid');
+    let featuredItems = [];
+    let featuredIndex = 0;
+
+    function renderFeatured() {
+      const game = featuredItems[featuredIndex];
+      if (!game) {
+        featuredGrid.innerHTML = '<p class="muted">Featured work could not be loaded.</p>';
+        return;
+      }
+      featuredGrid.innerHTML = `
+        <div class="experience-card">
+          <div class="experience-media">
+            <img src="${game.thumb}" alt="${game.title}">
+            <button class="experience-arrow prev" type="button" data-featured-nav="previous" aria-label="Previous creation">‹</button>
+            <button class="experience-arrow next" type="button" data-featured-nav="next" aria-label="Next creation">›</button>
+          </div>
+          <a class="experience-details" href="games/game.html?game=${encodeURIComponent(game.slug)}">
+            <h3>${game.title}</h3>
+            <p>${game.description || 'Roblox project.'}</p>
+            <div class="experience-stats">
+              <span class="experience-stat">Role<strong>${game.tag || 'Roblox project'}</strong></span>
+              <span class="experience-stat">Visits<strong>${game.visits ?? '—'}</strong></span>
+            </div>
+          </a>
+        </div>
+      `;
+    }
+
+    featuredGrid.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-featured-nav]');
+      if (!button) return;
+      event.preventDefault();
+      featuredIndex = button.dataset.featuredNav === 'next'
+        ? (featuredIndex + 1) % featuredItems.length
+        : (featuredIndex - 1 + featuredItems.length) % featuredItems.length;
+      renderFeatured();
+    });
+
     fetch('games.json')
       .then((response) => response.json())
       .then((games) => {
-        const featured = games.filter((game) => !game.hide).slice(0, 3);
-        document.getElementById('featured-grid').innerHTML = featured.map((game) => `
-          <a class="creation-card" href="games/game.html?game=${encodeURIComponent(game.slug)}">
-            <img src="${game.thumb}" alt="${game.title}">
-            <div class="creation-card-info">
-              <p class="creation-card-title">${game.title}</p>
-              <span class="creation-card-meta">${game.tag || 'Roblox project'}</span>
-            </div>
-          </a>
-        `).join('');
+        featuredItems = games.filter((game) => !game.hide);
+        renderFeatured();
       })
-      .catch(() => {
-        document.getElementById('featured-grid').innerHTML = '<p class="muted">Featured work could not be loaded.</p>';
-      });
+      .catch(() => renderFeatured());
+
+    const avatarToggle = document.getElementById('avatar-toggle');
+    const bannerAvatar = document.querySelector('[data-profile-avatar]');
+    let avatarMode = '2d';
+    avatarToggle.addEventListener('click', () => {
+      avatarMode = avatarMode === '2d' ? '3d' : '2d';
+      avatarToggle.textContent = avatarMode.toUpperCase();
+      avatarToggle.setAttribute('aria-pressed', String(avatarMode === '3d'));
+      const threeDImage = window.robloxProfileMedia?.avatar3d?.imageUrl;
+      if (avatarMode === '3d' && threeDImage) {
+        bannerAvatar.src = threeDImage;
+        bannerAvatar.classList.remove('avatar-rotation-fallback');
+      } else if (avatarMode === '3d') {
+        bannerAvatar.classList.add('avatar-rotation-fallback');
+      } else {
+        bannerAvatar.src = window.robloxProfileMedia?.avatar || 'Images/Avatar.png';
+        bannerAvatar.classList.remove('avatar-rotation-fallback');
+      }
+    });
   </script>
 </body>
 </html>
